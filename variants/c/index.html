@@ -236,6 +236,19 @@ section.blk{padding:84px 0}
   .tab .bar{animation:none !important}
   .mapbox{transition:none}
 }
+
+/* ── кнопки мессенджеров рядом с «Оставить заявку» ───────────────── */
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
+.msgs{display:flex;gap:10px}
+.msgb{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;cursor:default;
+  box-shadow:0 0 0 1px rgba(255,255,255,.18) inset;transition:transform .25s,box-shadow .25s}
+.msgb svg{width:28px;height:28px}
+.msgb.wa{background:#25d366}.msgb.tg{background:#229ed9}.msgb.mx{background:#4a5bff}
+.msgb:not([aria-disabled="true"]){cursor:pointer}
+.msgb:not([aria-disabled="true"]):hover{transform:translateY(-2px)}
+.or{margin:18px 0 10px;color:var(--muted);font-size:15px}
+.msgs--form .msgb{width:48px;height:48px}.msgs--form .msgb svg{width:24px;height:24px}
+.msgs--form{margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -294,7 +307,10 @@ section.blk{padding:84px 0}
     <span class="eyebrow">Для местного бизнеса</span>
     <h1>Реклама на экранах в автобусах Калининграда</h1>
     <p class="sub">Ваш ролик идёт в салонах — у самых крупных перевозчиков Калининградской области. <b>Каждую минуту, 10 секунд, без звука.</b></p>
-    <a class="btn" href="#zayavka">Оставить заявку<span class="ar" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M7 5h8v8"/></svg></span></a>
+    <div class="cta-row">
+      <a class="btn" href="#zayavka">Оставить заявку<span class="ar" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M7 5h8v8"/></svg></span></a>
+      <div class="msgs" role="group" aria-label="Написать менеджеру в мессенджер"><!-- TODO: ссылки на чат с менеджером добавить, когда будут номера/аккаунты (href не ставим) --><a class="msgb wa" data-chat="whatsapp" aria-label="WhatsApp: чат с менеджером" aria-disabled="true" title="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 4C9.4 4 4.02 9.37 4.02 16c0 2.12.55 4.18 1.6 6L4 28l6.18-1.6A12 12 0 0 0 16.04 28C22.67 28 28.06 22.63 28.06 16S22.67 4 16.04 4zm0 21.9c-1.8 0-3.55-.48-5.08-1.4l-.36-.22-3.67.95.98-3.58-.24-.37A9.9 9.9 0 0 1 6.1 16c0-5.46 4.46-9.9 9.94-9.9 5.48 0 9.94 4.44 9.94 9.9s-4.46 9.9-9.94 9.9zm5.45-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg></a><a class="msgb tg" data-chat="telegram" aria-label="Telegram: чат с менеджером" aria-disabled="true" title="Telegram"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M27.6 5.2 4.4 14.2c-1.6.64-1.58 1.53-.29 1.93l5.95 1.86 13.78-8.7c.65-.4 1.25-.19.76.25L12.45 19.6l-.43 6.1c.63 0 .9-.29 1.25-.63l3-2.9 6.22 4.6c1.15.63 1.97.3 2.26-1.06l4.09-19.3c.42-1.67-.64-2.43-1.74-1.9z"/></svg></a><a class="msgb mx" data-chat="max" aria-label="MAX: чат с менеджером" aria-disabled="true" title="MAX"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 4C9.4 4 4 8.9 4 15.2c0 3.5 1.7 6.6 4.3 8.7V28l4.1-2.3c1.1.3 2.3.5 3.6.5 6.6 0 12-4.9 12-11S22.6 4 16 4zm-5.6 14.6v-7.4h2.1l3.5 4.6v-4.6h2.1v7.4h-2.1l-3.5-4.6v4.6h-2.1zm10.5 0h-2.2v-7.4h2.2v7.4z" transform="translate(0 .3)"/></svg></a></div>
+    </div>
   </div>
 </section>
 
@@ -417,6 +433,8 @@ section.blk{padding:84px 0}
           <div class="f-row"><label for="f-biz">Что рекламируем</label><input id="f-biz" type="text" name="Что рекламируем" placeholder="Кофейня, автосервис, клиника…"></div>
           <div class="f-row"><label for="f-txt">Что важно сказать</label><textarea id="f-txt" name="Комментарий" placeholder="Сроки, пожелания к ролику"></textarea></div>
           <button class="btn" type="submit">Отправить заявку<span class="ar" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M7 5h8v8"/></svg></span></button>
+          <p class="or">или сразу напишите менеджеру</p>
+          <div class="msgs msgs--form" role="group" aria-label="Написать менеджеру в мессенджер"><!-- TODO: ссылки на чат с менеджером добавить, когда будут номера/аккаунты (href не ставим) --><a class="msgb wa" data-chat="whatsapp" aria-label="WhatsApp: чат с менеджером" aria-disabled="true" title="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 4C9.4 4 4.02 9.37 4.02 16c0 2.12.55 4.18 1.6 6L4 28l6.18-1.6A12 12 0 0 0 16.04 28C22.67 28 28.06 22.63 28.06 16S22.67 4 16.04 4zm0 21.9c-1.8 0-3.55-.48-5.08-1.4l-.36-.22-3.67.95.98-3.58-.24-.37A9.9 9.9 0 0 1 6.1 16c0-5.46 4.46-9.9 9.94-9.9 5.48 0 9.94 4.44 9.94 9.9s-4.46 9.9-9.94 9.9zm5.45-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg></a><a class="msgb tg" data-chat="telegram" aria-label="Telegram: чат с менеджером" aria-disabled="true" title="Telegram"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M27.6 5.2 4.4 14.2c-1.6.64-1.58 1.53-.29 1.93l5.95 1.86 13.78-8.7c.65-.4 1.25-.19.76.25L12.45 19.6l-.43 6.1c.63 0 .9-.29 1.25-.63l3-2.9 6.22 4.6c1.15.63 1.97.3 2.26-1.06l4.09-19.3c.42-1.67-.64-2.43-1.74-1.9z"/></svg></a><a class="msgb mx" data-chat="max" aria-label="MAX: чат с менеджером" aria-disabled="true" title="MAX"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 4C9.4 4 4 8.9 4 15.2c0 3.5 1.7 6.6 4.3 8.7V28l4.1-2.3c1.1.3 2.3.5 3.6.5 6.6 0 12-4.9 12-11S22.6 4 16 4zm-5.6 14.6v-7.4h2.1l3.5 4.6v-4.6h2.1v7.4h-2.1l-3.5-4.6v4.6h-2.1zm10.5 0h-2.2v-7.4h2.2v7.4z" transform="translate(0 .3)"/></svg></a></div>
           <p class="ok" data-ok hidden role="status"></p>
           <p class="fine">Отправляя форму, вы соглашаетесь, что мы свяжемся с вами по указанным контактам.</p>
         </form>
