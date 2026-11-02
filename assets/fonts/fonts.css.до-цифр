@@ -1,0 +1,19 @@
+@font-face{font-family:PF;src:url(playfair-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:PF;src:url(playfair-500.woff2) format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:PF;src:url(playfair-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:IN;src:url(inter-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:IN;src:url(inter-500.woff2) format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:OS;src:url(oswald-600.woff2) format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:JB;src:url(jb-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:JB;src:url(jb-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+/* ── премиальные шрифты с кириллицей (для новых вариантов 16–19) ── */
+@font-face{font-family:UNB;src:url(unb-300.woff2) format('woff2');font-weight:300;font-display:swap}
+@font-face{font-family:UNB;src:url(unb-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:UNB;src:url(unb-700.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:MAN;src:url(man-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:MAN;src:url(man-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:MAN;src:url(man-700.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:ONE;src:url(one-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:ONE;src:url(one-600.woff2) format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:COR;src:url(cor-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:COR;src:url(cor-400-i.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}

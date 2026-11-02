@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ДА-медиа — реклама на экранах в автобусах Калининграда</title>
+<meta name="description" content="Реклама на экранах в салонах автобусов Калининграда для местного бизнеса. Ролик 10 секунд выходит каждую минуту, без звука. Оставьте заявку.">
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+/* Вариант Б: светлый, редакционный. Шрифты: Cormorant (COR) для крупного, Manrope (MAN) для текста,
+   JetBrains Mono (JB) для мелких меток, Unbounded (UNB) только внутри экрана с роликами. */
+:root{
+  --bg:#FBFBFA;
+  --bone:#F4F2EE;
+  --ink:#111111;
+  --ink2:#2F3437;
+  --mute:#787774;
+  --line:#E6E4E0;
+  --hi:#FBF3DB;
+  --serif:COR,"Cormorant Garamond","Times New Roman",serif;
+  --sans:MAN,"Helvetica Neue",system-ui,sans-serif;
+  --mono:JB,"SF Mono",ui-monospace,monospace;
+  --pad:20px;
+  --maxw:1240px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+@media(min-width:768px){:root{--pad:40px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink2);font:400 17px/1.65 var(--sans);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+.lbl{font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.d{font-family:var(--sans);font-weight:500;letter-spacing:-.04em}
+.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.03em;color:var(--ink)}
+.serif i{font-style:italic}
+h2{font:400 clamp(38px,6vw,84px)/1.02 var(--serif);letter-spacing:-.03em;color:var(--ink)}
+.lead{font-size:clamp(18px,1.6vw,22px);line-height:1.55;color:var(--ink2);max-width:34em}
+mark{background:var(--hi);color:var(--ink);padding:0 .18em;border-radius:2px}
+
+/* кнопки: тёмные, прямоугольные */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;background:var(--ink);color:#fff;
+  border:0;border-radius:4px;font:500 16px/1 var(--sans);text-decoration:none;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:#333}
+.btn:active{transform:scale(.98)}
+.tlink{font:500 16px/1.4 var(--sans);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding:4px 0}
+.tlink:hover{border-color:transparent}
+
+/* шапка */
+.hd{position:sticky;top:0;z-index:20;background:rgba(251,251,250,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:400 26px/1 var(--serif);letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.logo b{font-weight:400;font-style:italic}
+.hd nav{display:none;gap:32px;font-size:15px}
+.hd nav a{text-decoration:none;color:var(--mute);transition:color .2s}
+.hd nav a:hover{color:var(--ink)}
+.hd .btn{min-height:40px;padding:0 18px;font-size:14px}
+@media(min-width:860px){.hd nav{display:flex}}
+
+/* 1. первый экран */
+.hero{padding-block:clamp(48px,8vw,112px) 0}
+.hero h1{font:400 clamp(46px,9.2vw,148px)/.98 var(--serif);letter-spacing:-.035em;color:var(--ink);margin-top:22px;max-width:11.5em}
+.hero h1 i{font-style:italic}
+.hero-row{display:grid;gap:28px;margin-top:clamp(32px,4vw,56px);align-items:end}
+.hero-act{display:flex;flex-wrap:wrap;gap:20px 28px;align-items:center}
+.hero-meta{display:grid;gap:14px;margin-top:clamp(28px,3vw,44px);padding-top:22px;border-top:1px solid var(--line);font-size:16px;color:var(--ink2)}
+.hero-meta b{font-weight:500;color:var(--ink)}
+@media(min-width:900px){
+  .hero-row{grid-template-columns:1.15fr .85fr;gap:64px}
+  .hero-act{justify-content:flex-end}
+  .hero-meta{grid-template-columns:repeat(3,auto);justify-content:space-between}
+}
+.hero-ph{margin-top:clamp(40px,6vw,88px);overflow:hidden;position:relative;background:var(--bone)}
+.hero-ph img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:68% 50%;filter:saturate(.82) contrast(.97)}
+@media(min-width:700px){.hero-ph img{aspect-ratio:21/9;object-position:50% 52%}}
+.cap{margin-top:12px;font:400 13px/1.5 var(--mono);color:var(--mute)}
+
+.sec{padding-block:clamp(88px,13vw,184px)}
+.sec-h{display:grid;gap:22px;margin-bottom:clamp(44px,6vw,84px)}
+.sec-h .lead{margin-top:4px}
+
+/* 2. экран в автобусе */
+.scr-wrap{display:grid;gap:clamp(40px,6vw,88px);align-items:center}
+@media(min-width:960px){.scr-wrap{grid-template-columns:.9fr 1.1fr}}
+.scr-wrap h2{font-size:clamp(36px,4.6vw,66px)}
+.facts{margin-top:36px;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:18px 0;border-bottom:1px solid var(--line)}
+.facts dt{font:400 clamp(26px,2.6vw,34px)/1.1 var(--serif);color:var(--ink);letter-spacing:-.02em}
+.facts dd{font-size:15px;color:var(--mute)}
+.bus{background:var(--bone);padding:clamp(18px,4vw,48px) clamp(14px,3.5vw,44px) 0;position:relative}
+.tv{background:#141414;padding:clamp(7px,1.2vw,12px);border-radius:8px}
+.tv svg{display:block;width:100%;height:auto;border-radius:2px}
+.tv-bar{height:2px;background:#333;margin-top:clamp(5px,.8vw,8px);overflow:hidden}
+.tv-bar i{display:block;height:100%;background:#9a9a9a;transform-origin:0 50%;transform:scaleX(0)}
+.tv-bar i.run{animation:fill var(--dur,7s) linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.rail{height:clamp(14px,2.4vw,22px);margin-top:clamp(20px,3vw,36px);background:#7fae7a;border-radius:11px 11px 0 0}
+.sc{opacity:0;transition:opacity .6s ease}
+.sc.on{opacity:1}
+.u{font-family:UNB,MAN,sans-serif;font-weight:700;letter-spacing:-.01em}
+.m{font-family:MAN,sans-serif;font-weight:500}
+/* ролики внутри экрана */
+.sc.on .wheel{animation:spin 2.4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wheel{transform-box:fill-box;transform-origin:center}
+.sc.on .road{animation:road .7s linear infinite}
+@keyframes road{to{stroke-dashoffset:-28}}
+.steam path{opacity:0}
+.sc.on .steam path{animation:steam 2.6s ease-in infinite}
+.sc.on .steam path:nth-child(2){animation-delay:.8s}
+.sc.on .steam path:nth-child(3){animation-delay:1.6s}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}30%{opacity:.9}100%{opacity:0;transform:translateY(-22px)}}
+.sc.on .tooth{animation:bob 1.8s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-4px) rotate(-2deg)}}
+.tooth{transform-box:fill-box;transform-origin:center}
+.sparkle{transform-box:fill-box;transform-origin:center;opacity:0}
+.sc.on .sparkle{animation:twinkle 1.4s ease-in-out infinite}
+.sc.on .sparkle.s2{animation-delay:.5s}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1)}}
+.sc.on .hand{animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.35}}
+
+/* 3. карта */
+.kwrap{max-width:none}
+.kscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:#e9edf2;scrollbar-width:thin}
+.kmap{position:relative;width:max(100%,860px);aspect-ratio:1600/1117}
+.kmap img{position:absolute;inset:0;width:100%;height:100%;max-width:none}
+.kbase{transition:filter .5s ease}
+.kmap.focus .kbase{filter:saturate(.1) brightness(1.08) contrast(.88)}
+.rl{opacity:0;pointer-events:none;transition:opacity .45s ease}
+.rl.on{opacity:1;filter:drop-shadow(0 0 3px var(--c)) drop-shadow(0 0 8px var(--c));
+  -webkit-mask-image:linear-gradient(105deg,#000 0,#000 34%,rgba(0,0,0,.3) 46%,#000 58%,#000 100%);
+  mask-image:linear-gradient(105deg,#000 0,#000 34%,rgba(0,0,0,.3) 46%,#000 58%,#000 100%);
+  -webkit-mask-size:260% 100%;mask-size:260% 100%;animation:ksweep 2.6s linear infinite}
+@keyframes ksweep{from{-webkit-mask-position:100% 0;mask-position:100% 0}to{-webkit-mask-position:0 0;mask-position:0 0}}
+.kctl{margin-top:24px;display:grid;gap:16px}
+.kchips{display:flex;flex-wrap:wrap;gap:8px}
+.kch{appearance:none;background:#fff;border:1px solid var(--line);border-bottom:4px solid var(--c);border-radius:4px;
+  min-width:52px;height:52px;cursor:pointer;font:500 18px/1 var(--sans);color:var(--ink);padding:0 4px;transition:background .2s,border-color .2s}
+.kch:hover{background:var(--bone)}
+.kch[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);border-bottom-color:var(--c);color:#fff}
+.kall{appearance:none;background:transparent;border:1px solid var(--line);border-radius:4px;height:52px;padding:0 18px;cursor:pointer;font:500 15px/1 var(--sans);color:var(--mute)}
+.kall[aria-pressed="true"]{color:var(--ink);border-color:var(--ink)}
+.kinfo{min-height:1.65em;color:var(--ink);font-size:18px}
+.khint{display:none;font-size:14px;color:var(--mute)}
+@media(max-width:860px){.khint{display:block}}
+.kbig{justify-self:start}
+.kcap{font:400 13px/1.5 var(--mono);color:var(--mute)}
+
+/* 4. шаги */
+.steps{border-top:1px solid var(--ink)}
+.steps li{display:grid;gap:10px 40px;padding:clamp(26px,3.4vw,44px) 0;border-bottom:1px solid var(--line)}
+.steps .n{font:500 clamp(40px,5vw,68px)/.9 var(--sans);color:var(--ink);letter-spacing:-.05em}
+.steps h3{font:400 clamp(26px,3vw,40px)/1.1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+.steps p{color:var(--ink2);max-width:36em}
+@media(min-width:860px){.steps li{grid-template-columns:120px 1fr 1fr;align-items:baseline}}
+.price{margin-top:clamp(40px,5vw,72px);font:400 clamp(28px,3.6vw,52px)/1.15 var(--serif);letter-spacing:-.025em;color:var(--ink);max-width:24em}
+
+/* 5. заявка */
+.order{display:grid;gap:clamp(48px,6vw,96px)}
+@media(min-width:960px){.order{grid-template-columns:1.1fr .9fr;align-items:start}}
+.f-row{display:grid;gap:6px;margin-bottom:22px}
+.f-row label{font:500 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.f-row input,.f-row textarea{width:100%;background:transparent;border:0;border-bottom:1px solid #cfcdc8;border-radius:0;padding:10px 0;font-size:18px;color:var(--ink);transition:border-color .2s}
+.f-row input:focus,.f-row textarea:focus{outline:0;border-bottom-color:var(--ink)}
+.f-row textarea{min-height:92px;resize:vertical}
+.fine{margin-top:16px;font-size:14px;color:var(--mute)}
+.ok{margin-top:14px;color:var(--ink);font-weight:500}
+.cts{border-top:1px solid var(--line);margin-top:20px}
+.cts li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.cts .k{font:500 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.cts a{font-size:19px;color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;overflow-wrap:anywhere}
+.cts a:hover{border-color:var(--ink)}
+.order h3{font:400 clamp(28px,3vw,40px)/1.1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+
+.ft{border-top:1px solid var(--line);padding-block:40px 48px;font-size:14px;color:var(--mute)}
+.ft .wrap{display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between}
+.ft a{text-decoration:none;border-bottom:1px solid var(--line)}
+
+/* появление */
+.js .rv{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0)*80ms)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .rl.on{animation:none;-webkit-mask-image:none;mask-image:none}
+  .sc *{animation:none !important}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#top">ДА<b>-медиа</b></a>
+    <nav aria-label="Разделы">
+      <a href="#ekran">Как выглядит</a>
+      <a href="#karta">Карта</a>
+      <a href="#zapusk">Как запустить</a>
+      <a href="#zayavka">Контакты</a>
+    </nav>
+    <a class="btn" href="#zayavka">Оставить заявку</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. ПЕРВЫЙ ЭКРАН: что, для кого, что делать -->
+<section class="hero wrap">
+  <p class="lbl rv">Для местного бизнеса Калининграда</p>
+  <h1 class="rv" style="--i:1">Ваша реклама на экранах в&nbsp;<i>салонах автобусов</i></h1>
+  <div class="hero-row rv" style="--i:2">
+    <p class="lead">У самых крупных перевозчиков Калининградской области. Человек едет пятнадцать&ndash;двадцать минут и смотрит туда, где светится.</p>
+    <div class="hero-act">
+      <a class="btn" href="#zayavka">Оставить заявку</a>
+      <a class="tlink" href="tel:+74012377742">+7 (4012) 37-77-42</a>
+    </div>
+  </div>
+  <div class="hero-meta rv" style="--i:3">
+    <p><b>Ролик 10 секунд</b>, без звука</p>
+    <p><b>Выходит каждую минуту</b> на экране</p>
+    <p>Изготовление ролика или баннера &mdash; <mark>3&nbsp;000&nbsp;₽</mark>, от трёх месяцев бесплатно</p>
+  </div>
+  <figure class="hero-ph rv" style="--i:1">
+    <img src="../../assets/foto/кг/04-transport.jpg" width="2400" height="1800" alt="Городской автобус на перекрёстке в центре Калининграда">
+  </figure>
+  <p class="cap">Ленинский проспект, Калининград. Фото: Artyom Svetlov, Wikimedia Commons, CC BY 4.0</p>
+</section>
+
+<!-- 2. КАК ВЫГЛЯДИТ ЭКРАН -->
+<section class="sec" id="ekran">
+  <div class="wrap scr-wrap">
+    <div class="rv">
+      <p class="lbl">Что видит пассажир</p>
+      <h2 style="margin-top:22px">Десять секунд. Каждую минуту. <i>Без звука.</i></h2>
+      <p class="lead" style="margin-top:28px">Человек уже сел и смотрит вперёд. Звука нет, поэтому работает крупная строка, короткая подстрока и телефон.</p>
+      <dl class="facts">
+        <div><dt><span class="d">10</span> секунд</dt><dd>длится один ролик</dd></div>
+        <div><dt>Каждую минуту</dt><dd>ролик выходит на экране заново</dd></div>
+        <div><dt>Ваш ролик</dt><dd>соберём мы или возьмём готовый</dd></div>
+      </dl>
+    </div>
+
+    <!-- TODO: доля мужчин/женщин, ждём данных -->
+
+    <div class="rv" style="--i:1">
+      <div class="bus">
+        <div class="tv" role="img" aria-label="Экран в салоне автобуса: по очереди идут примеры роликов — шиномонтаж, кафе, стоматология и финальный кадр «Здесь может быть ваша реклама»">
+          <svg viewBox="0 0 320 180" aria-hidden="true">
+            <!-- 1. шиномонтаж -->
+            <g class="sc on" data-sc>
+              <rect width="320" height="180" fill="#f4c542"/>
+              <line class="road" x1="0" y1="152" x2="320" y2="152" stroke="#1d1d1d" stroke-width="3" stroke-dasharray="16 12"/>
+              <g class="wheel">
+                <circle cx="236" cy="96" r="52" fill="#1d1d1d"/>
+                <circle cx="236" cy="96" r="32" fill="#d7dbe0"/>
+                <circle cx="236" cy="96" r="9" fill="#1d1d1d"/>
+                <g stroke="#1d1d1d" stroke-width="5" stroke-linecap="round">
+                  <line x1="236" y1="96" x2="236" y2="68"/><line x1="236" y1="96" x2="262.6" y2="87.4"/>
+                  <line x1="236" y1="96" x2="252.5" y2="118.6"/><line x1="236" y1="96" x2="219.5" y2="118.6"/>
+                  <line x1="236" y1="96" x2="209.4" y2="87.4"/>
+                </g>
+              </g>
+              <text class="u" x="16" y="62" font-size="18" fill="#1d1d1d">Переобуем</text>
+              <text class="u" x="16" y="86" font-size="18" fill="#1d1d1d">за 30 минут</text>
+              <text class="m" x="16" y="112" font-size="10" fill="#1d1d1d">Шиномонтаж «Круг»</text>
+              <text class="m" x="16" y="128" font-size="10" fill="#1d1d1d">ул. Горького, +7 (4012) 37-77-42</text>
+            </g>
+            <!-- 2. суп -->
+            <g class="sc" data-sc>
+              <rect width="320" height="180" fill="#f3e6cc"/>
+              <g class="steam" fill="none" stroke="#9a8a70" stroke-width="3" stroke-linecap="round">
+                <path d="M212 90 q-8 -10 0 -20 q8 -10 0 -20"/>
+                <path d="M236 90 q-8 -10 0 -20 q8 -10 0 -20"/>
+                <path d="M260 90 q-8 -10 0 -20 q8 -10 0 -20"/>
+              </g>
+              <path d="M172 104 H300 C300 142 272 160 236 160 C200 160 172 142 172 104 Z" fill="#b8432f"/>
+              <ellipse cx="236" cy="104" rx="64" ry="9" fill="#e8a33d"/>
+              <circle cx="220" cy="103" r="3" fill="#7a9a3c"/><circle cx="246" cy="105" r="3" fill="#c0392b"/><circle cx="262" cy="102" r="2.5" fill="#7a9a3c"/>
+              <rect x="206" y="160" width="60" height="5" rx="2" fill="#8c3322"/>
+              <text class="u" x="16" y="62" font-size="18" fill="#2a1d14">Горячий суп</text>
+              <text class="u" x="16" y="86" font-size="18" fill="#2a1d14">каждый день</text>
+              <text class="m" x="16" y="112" font-size="10" fill="#2a1d14">Кафе «Печка»</text>
+              <text class="m" x="16" y="128" font-size="10" fill="#2a1d14">Обед с 12 до 16</text>
+            </g>
+            <!-- 3. зуб -->
+            <g class="sc" data-sc>
+              <rect width="320" height="180" fill="#bfe3ef"/>
+              <g class="tooth">
+                <path d="M204 70 C204 50 222 46 236 56 C250 46 268 50 268 70 C268 96 258 106 256 138 C254 156 243 156 241 136 C239 118 233 118 231 136 C229 156 218 156 216 138 C214 106 204 96 204 70 Z" fill="#fff" stroke="#1b4f6b" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M224 82 q12 10 24 0" fill="none" stroke="#1b4f6b" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="225" cy="70" r="2.6" fill="#1b4f6b"/><circle cx="247" cy="70" r="2.6" fill="#1b4f6b"/>
+              </g>
+              <path class="sparkle" d="M280 40 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 l9 -3 Z" fill="#fff"/>
+              <path class="sparkle s2" d="M194 112 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 Z" fill="#fff"/>
+              <text class="u" x="16" y="62" font-size="18" fill="#12384f">Улыбка</text>
+              <text class="u" x="16" y="86" font-size="18" fill="#12384f">без страха</text>
+              <text class="m" x="16" y="112" font-size="10" fill="#12384f">Стоматология «Улыбка»</text>
+              <text class="m" x="16" y="128" font-size="10" fill="#12384f">Осмотр и чистка</text>
+            </g>
+            <!-- 4. финальный кадр -->
+            <g class="sc" data-sc>
+              <rect width="320" height="180" fill="#071a3d"/>
+              <text class="u" x="160" y="64" font-size="17" fill="#fff" text-anchor="middle">Здесь может быть</text>
+              <text class="u" x="160" y="90" font-size="17" fill="#ff8a3d" text-anchor="middle">ваша реклама</text>
+              <line x1="120" y1="106" x2="200" y2="106" stroke="#3d5688" stroke-width="1"/>
+              <text class="u" x="160" y="128" font-size="12" fill="#fff" text-anchor="middle">ДА-медиа</text>
+              <text class="u hand" x="160" y="150" font-size="12" fill="#fff" text-anchor="middle">+7 (4012) 37-77-42</text>
+            </g>
+          </svg>
+          <div class="tv-bar"><i data-bar></i></div>
+        </div>
+        <div class="rail"></div>
+      </div>
+      <p class="cap">Так выглядит экран. Примеры роликов придуманы для показа.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. КАРТА -->
+<section class="sec" id="karta" style="background:var(--bone)">
+  <div class="wrap">
+    <header class="sec-h rv">
+      <p class="lbl">Карта</p>
+      <h2>Маршруты <i>на карте города</i></h2>
+      <p class="lead">Первый перевозчик в сети. Нажмите на номер маршрута и он подсветится на карте. Реклама идёт на тех маршрутах, которые вы выберете.</p>
+    </header>
+    <div class="kwrap rv" data-karta>
+      <div class="kscroll" data-scroll>
+        <div class="kmap">
+          <img class="kbase" src="../../assets/karta/karta-marshrutov.jpg" width="1600" height="1117" loading="lazy"
+               alt="Схема автобусных маршрутов Калининграда: 4, 8, 10, 21, 25, 26, 29 и 48">
+          <img class="rl" data-r="4" style="--c:#fa0a23" src="../../assets/karta/r4.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="8" style="--c:#00914b" src="../../assets/karta/r8.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="10" style="--c:#0050af" src="../../assets/karta/r10.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="21" style="--c:#e223aa" src="../../assets/karta/r21.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="25" style="--c:#f0b400" src="../../assets/karta/r25.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="26" style="--c:#96c81e" src="../../assets/karta/r26.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="29" style="--c:#0096e1" src="../../assets/karta/r29.png" alt="" width="1600" height="1117" loading="lazy">
+        </div>
+      </div>
+      <div class="kctl">
+        <div class="kchips" role="group" aria-label="Выбор маршрута"><button type="button" class="kch" data-r="4" style="--c:#fa0a23" aria-pressed="false">4</button><button type="button" class="kch" data-r="8" style="--c:#00914b" aria-pressed="false">8</button><button type="button" class="kch" data-r="10" style="--c:#0050af" aria-pressed="false">10</button><button type="button" class="kch" data-r="21" style="--c:#e223aa" aria-pressed="false">21</button><button type="button" class="kch" data-r="25" style="--c:#f0b400" aria-pressed="false">25</button><button type="button" class="kch" data-r="26" style="--c:#96c81e" aria-pressed="false">26</button><button type="button" class="kch" data-r="29" style="--c:#0096e1" aria-pressed="false">29</button><button type="button" class="kall" data-all>Все маршруты</button></div>
+        <p class="kinfo" data-info aria-live="polite">Нажмите на номер маршрута</p>
+        <p class="khint">Карту можно двигать пальцем вправо и влево.</p>
+        <a class="tlink kbig" href="../../assets/karta/karta-marshrutov.jpg" target="_blank" rel="noopener">Открыть карту крупно</a>
+        <p class="kcap">Схема городских автобусных маршрутов, Калининград.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. КАК ЗАПУСТИТЬ -->
+<section class="sec" id="zapusk">
+  <div class="wrap">
+    <header class="sec-h rv">
+      <p class="lbl">Как запустить</p>
+      <h2>Четыре шага <i>от заявки до эфира</i></h2>
+    </header>
+    <ol class="steps">
+      <li class="rv"><span class="n">1</span><h3>Вы пишете, что рекламируете</h3><p>Район, срок и пара слов о деле. Звонок необязателен.</p></li>
+      <li class="rv"><span class="n">2</span><h3>Собираем ролик на десять секунд</h3><p>Крупная строка, короткая подстрока, телефон. Из вашего материала или из готового ролика, если он есть.</p></li>
+      <li class="rv"><span class="n">3</span><h3>Ставим ролик в эфир</h3><p>С этого дня он выходит на выбранных маршрутах каждую минуту.</p></li>
+      <li class="rv"><span class="n">4</span><h3>Показываем, что было в эфире</h3><p>После кампании присылаем сводку: экраны, дни и показы.</p></li>
+    </ol>
+    <p class="price rv">Изготовление ролика или баннера &mdash; <mark><span class="d">3&nbsp;000&nbsp;₽</span></mark>. При размещении от трёх месяцев &mdash; <i>бесплатно.</i></p>
+  </div>
+</section>
+
+<!-- 5. ЗАЯВКА И КОНТАКТЫ -->
+<section class="sec" id="zayavka" style="background:var(--bone)">
+  <div class="wrap">
+    <header class="sec-h rv">
+      <p class="lbl">Заявка</p>
+      <h2>Напишите пару строк, <i>мы свяжемся</i></h2>
+      <p class="lead">Форма откроет почтовую программу с готовым письмом. Если так неудобно, звоните или пишите в мессенджер.</p>
+    </header>
+    <div class="order">
+      <form class="rv" data-mail novalidate>
+        <div class="f-row"><label for="f-name">Как к вам обращаться</label><input id="f-name" name="Имя" type="text" autocomplete="name" required></div>
+        <div class="f-row"><label for="f-tel">Телефон или мессенджер</label><input id="f-tel" name="Связь" type="text" autocomplete="tel" required></div>
+        <div class="f-row"><label for="f-biz">Что рекламируем</label><input id="f-biz" name="Что рекламируем" type="text" placeholder="Кофейня, автосервис, клиника"></div>
+        <div class="f-row"><label for="f-txt">Что важно сказать</label><textarea id="f-txt" name="Комментарий" placeholder="Район, сроки, пожелания к ролику"></textarea></div>
+        <button class="btn" type="submit">Отправить заявку</button>
+        <p class="ok" data-ok hidden></p>
+        <p class="fine">Отправляя форму, вы соглашаетесь, что мы свяжемся с вами по указанным контактам.</p>
+      </form>
+      <div class="rv" style="--i:1">
+        <h3>Прямые контакты</h3>
+        <ul class="cts">
+          <li><span class="k">Телефон</span><a href="tel:+74012377742">+7 (4012) 37-77-42</a></li>
+          <li><span class="k">Почта</span><a href="mailto:info@damedia39.ru">info@damedia39.ru</a></li>
+          <li><span class="k">Telegram</span><a href="https://t.me/damedia39">Написать в Telegram</a></li>
+          <li><span class="k">MAX</span><a href="https://max.ru/damedia39">Написать в MAX</a></li>
+        </ul>
+        <p class="fine">Отвечаем в рабочее время. Предложение готовим в тот же день.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <span>ДА-медиа &mdash; реклама на экранах в автобусах Калининграда</span>
+    <a href="#top">Наверх</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  /* появление блоков при прокрутке */
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -4% 0px'});
+    rv.forEach(function(el){io.observe(el)});
+  } else { rv.forEach(function(el){el.classList.add('in')}); }
+
+  /* экран с примерами роликов: четыре кадра по кругу */
+  var sc=[].slice.call(document.querySelectorAll('[data-sc]')), bar=document.querySelector('[data-bar]');
+  var DUR=7000, k=0, t=null;
+  function bar0(){ if(!bar) return; bar.classList.remove('run'); void bar.offsetWidth; bar.style.setProperty('--dur',DUR+'ms'); bar.classList.add('run') }
+  function show(n){ sc.forEach(function(g,i){g.classList.toggle('on',i===n)}); bar0() }
+  function tick(){ k=(k+1)%sc.length; show(k) }
+  var tv=document.querySelector('.tv'), reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  show(0);
+  if(!reduce && tv){
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ if(es[0].isIntersecting){ if(!t) t=setInterval(tick,DUR) } else if(t){ clearInterval(t); t=null } },{threshold:.2}).observe(tv);
+    } else t=setInterval(tick,DUR);
+  }
+
+  /* карта: подсветка по очереди и по нажатию на номер */
+  var root=document.querySelector('[data-karta]');
+  if(root){
+    var map=root.querySelector('.kmap'), layers=[].slice.call(root.querySelectorAll('.rl')),
+        chips=[].slice.call(root.querySelectorAll('.kch')), all=root.querySelector('[data-all]'), info=root.querySelector('[data-info]'),
+        scroller=root.querySelector('[data-scroll]');
+    var N={"4":["мкр. Северная гора","Завод «Янтарь»"],"8":["ул. О. Кошевого","Силикатный завод"],"10":["мкр. Северная гора","Завод «Янтарь»"],"21":["ул. П. Морозова","Автошкола"],"25":["мкр. Северная гора","СНТ «Медик»"],"26":["ул. Белорусская","ул. Аксакова"],"29":["Завод «Янтарь»","СНТ «Колосок»"]};
+    var i=-1, timer=null, seen=false, manual=false, still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function pick(n){
+      map.classList.toggle('focus',!!n);
+      layers.forEach(function(l){l.classList.toggle('on',l.dataset.r===n)});
+      chips.forEach(function(c){c.setAttribute('aria-pressed',c.dataset.r===n?'true':'false')});
+      all.setAttribute('aria-pressed',n?'false':'true');
+      info.textContent=n?('Маршрут '+n+': '+N[n][0]+' ↔ '+N[n][1]):'Нажмите на номер маршрута';
+    }
+    function step(){ i=(i+1)%chips.length; pick(chips[i].dataset.r) }
+    function go(){ if(still||timer||!seen||manual) return; step(); timer=setInterval(step,3000) }
+    function halt(){ if(timer){clearInterval(timer);timer=null} }
+    chips.forEach(function(c){c.addEventListener('click',function(){manual=true;halt();pick(c.dataset.r);i=chips.indexOf(c)})});
+    all.addEventListener('click',function(){manual=true;halt();pick(null)});
+    pick(null);
+    /* на телефоне карта шире экрана: начинаем с середины */
+    if(scroller && scroller.scrollWidth>scroller.clientWidth){ scroller.scrollLeft=(scroller.scrollWidth-scroller.clientWidth)/2 }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ seen=es[0].isIntersecting; seen?go():(halt(),manual=false,pick(null)) },{threshold:.35}).observe(root);
+    }
+  }
+
+  /* заявка: письмо на почту без сервера */
+  var form=document.querySelector('form[data-mail]');
+  if(form){
+    var MAIL='info@damedia39.ru';
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var ok=form.querySelector('[data-ok]'), d=new FormData(form), rows=[];
+      if(!String(d.get('Имя')||'').trim() || !String(d.get('Связь')||'').trim()){
+        ok.hidden=false; ok.textContent='Укажите имя и как с вами связаться.'; return;
+      }
+      d.forEach(function(v,key){ if(String(v).trim()) rows.push(key+': '+v) });
+      location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Заявка на рекламу — ДА-медиа')+'&body='+encodeURIComponent('Заявка с сайта ДА-медиа\n\n'+rows.join('\n'));
+      ok.hidden=false; ok.textContent='Открываем почту. Если окно не появилось, пишите на '+MAIL;
+    });
+  }
+})();
+</script>
+</body>
+</html>

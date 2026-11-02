@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ДА-медиа — реклама на экранах в автобусах Калининграда</title>
+<meta name="description" content="Ваш ролик на экранах в салонах автобусов самых крупных перевозчиков Калининградской области. Для местного бизнеса. Оставьте заявку.">
+<meta name="theme-color" content="#050f26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050f26'/%3E%3Crect x='6' y='10' width='20' height='12' rx='3' fill='none' stroke='%23ff6a13' stroke-width='2.5'/%3E%3C/svg%3E">
+<script>document.documentElement.className='js'</script>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+/* Вариант В — «Ночная карта»: тёмный, карта города — герой первого экрана */
+button,input,select,textarea{font-family:inherit}
+:root{
+  --bg:#050f26; --bg2:#071a3d; --bg3:#0b2350;
+  --ink:#eef2fa; --muted:#a9b8d6; --line:rgba(255,255,255,.12);
+  --orange:#ff6a13; --orange2:#ffa05c;
+  --head:UNB,sans-serif; --txt:MAN,sans-serif; --mono:JB,monospace;
+  --pad:20px; --spring:cubic-bezier(.32,.72,0,1);
+  --ratio:1.7486;
+}
+@media(min-width:760px){:root{--pad:40px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.6 var(--txt);overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--orange2);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;
+  font:500 11px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--orange2);background:rgba(5,15,38,.55)}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1,h2,h3{font-family:var(--head);font-weight:500;line-height:1.12;margin:0;letter-spacing:-.01em}
+p{margin:0}
+
+/* кнопка с вложенной стрелкой */
+.btn{display:inline-flex;align-items:center;gap:16px;min-height:56px;padding:8px 8px 8px 28px;border:0;border-radius:999px;
+  background:var(--orange);color:#1a0a00;font:700 17px/1 var(--txt);cursor:pointer;text-decoration:none;
+  transition:transform .6s var(--spring),background .4s var(--spring)}
+.btn:hover{background:var(--orange2)}
+.btn:active{transform:scale(.98)}
+.btn .ar{width:40px;height:40px;border-radius:50%;background:rgba(26,10,0,.12);display:grid;place-items:center;
+  transition:transform .6s var(--spring)}
+.btn:hover .ar{transform:translate(3px,-2px) scale(1.06)}
+.btn .ar svg{width:18px;height:18px}
+.btn{white-space:nowrap}
+.btn--sm{min-height:44px;padding:4px 4px 4px 20px;font-size:15px;gap:12px}
+.btn--sm .ar{width:36px;height:36px}
+
+/* плавающая шапка-«остров» */
+.top{position:fixed;z-index:30;top:14px;left:var(--pad);right:var(--pad);margin-inline:auto;max-width:1160px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 6px 6px 20px;border-radius:999px;
+  background:rgba(7,26,61,.62);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.logo{white-space:nowrap;display:inline-flex;align-items:center;gap:10px;font:700 16px/1 var(--head);text-decoration:none;letter-spacing:.01em}
+.logo i{width:20px;height:13px;border:1.5px solid var(--orange);border-radius:3px;position:relative;flex:none}
+.logo i::after{content:"";position:absolute;left:3px;right:3px;top:3px;height:2px;border-radius:2px;background:var(--orange)}
+.nav{display:none;gap:30px;font:500 14px/1 var(--txt)}
+.nav a{text-decoration:none;color:var(--muted);transition:color .4s var(--spring)}
+.nav a:hover{color:var(--ink)}
+@media(min-width:900px){.nav{display:flex}}
+.top .sh{display:none}
+@media(max-width:520px){.top .lg{display:none}.top .sh{display:inline}.top{padding-left:16px}}
+
+/* ───────── ПЕРВЫЙ ЭКРАН: КАРТА ───────── */
+.hero{position:relative;background:var(--bg)}
+.stage{position:relative;height:max(38svh,280px);overflow:hidden;background:var(--bg2)}
+.mapbox{position:absolute;left:0;top:0;height:100%;width:calc(max(38svh,280px)*var(--ratio));
+  background:var(--bg2);isolation:isolate;transform:translateX(var(--tx,0px));
+  transition:transform 1.1s var(--spring)}
+.mapbox img{position:absolute;left:0;top:0;width:100%;height:auto;max-width:none}
+.mapbox .base{z-index:1;filter:grayscale(1) invert(1) brightness(1.08) contrast(.92);mix-blend-mode:screen;opacity:.72}
+.rl{z-index:3;opacity:0;pointer-events:none;transition:opacity .7s var(--spring)}
+.rl.on{opacity:1;filter:brightness(1.3) saturate(1.15) drop-shadow(0 0 5px var(--g,var(--c))) drop-shadow(0 0 16px var(--g,var(--c)));
+  animation:glow 2.6s var(--spring) infinite alternate}
+@keyframes glow{from{opacity:.78}to{opacity:1}}
+.patch{position:absolute;z-index:4;left:1.6%;top:3%;width:28.4%;height:30.8%;background:var(--bg);
+  box-shadow:0 0 26px 20px var(--bg);border-radius:6px}
+.scrim-l{display:none}
+.fade{position:absolute;z-index:5;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,15,38,.85) 0,rgba(5,15,38,0) 22%,rgba(5,15,38,0) 70%,var(--bg) 100%)}
+.hero-foot{position:relative;z-index:6;padding:6px var(--pad) 0}
+.kchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.kch{appearance:none;border:0;width:44px;height:44px;border-radius:50%;background:var(--c);color:var(--t,#fff);cursor:pointer;
+  font:700 16px/1 var(--txt);padding:0;opacity:.62;
+  transition:opacity .4s var(--spring),transform .5s var(--spring),box-shadow .4s var(--spring)}
+.kch:hover{opacity:1}
+.kch[aria-pressed="true"]{opacity:1;transform:scale(1.1);box-shadow:0 0 0 2px var(--bg),0 0 0 4px #fff}
+.kmode{appearance:none;border:1px solid var(--line);background:transparent;color:var(--muted);height:44px;padding:0 16px;
+  border-radius:999px;cursor:pointer;font:600 14px/1 var(--txt);transition:color .4s var(--spring),border-color .4s var(--spring)}
+.kmode:hover,.kmode[aria-pressed="true"]{color:var(--orange2);border-color:var(--orange)}
+.kinfo{margin-top:8px;font:500 12px/1.5 var(--mono);color:var(--muted);letter-spacing:.02em;min-height:1.5em}
+.kcap{margin-top:2px;font:500 12px/1.5 var(--mono);color:#7d90b4}
+
+.hero-in{position:relative;z-index:6;padding:14px var(--pad) 40px}
+.hero-in h1{font-size:clamp(26px,7vw,34px);margin:12px 0 12px;max-width:15em}
+.hero-in .sub{color:var(--muted);font-size:16px;max-width:30em;margin-bottom:24px}
+.hero-in .sub b{color:var(--ink);font-weight:600}
+
+@media(min-width:760px){
+  .hero{height:max(100svh,660px);display:grid;grid-template-rows:1fr auto;min-height:660px}
+  .stage{position:absolute;inset:0;height:auto}
+  .mapbox{left:50%;top:50%;height:auto;aspect-ratio:1600/915;width:max(100%,calc(max(100svh,660px)*var(--ratio)));
+    transform:translate(-50%,-50%);transition:none}
+  .scrim-l{display:block;position:absolute;inset:0;z-index:2;
+    background:linear-gradient(90deg,var(--bg) 0,rgba(5,15,38,.93) 26%,rgba(5,15,38,.62) 46%,rgba(5,15,38,.12) 70%,rgba(5,15,38,0) 100%)}
+  .fade{background:linear-gradient(180deg,rgba(5,15,38,.8) 0,rgba(5,15,38,0) 18%,rgba(5,15,38,0) 74%,rgba(5,15,38,.92) 100%)}
+  .hero-in{grid-row:1;align-self:center;padding:96px var(--pad) 0;width:100%;max-width:1240px;margin-inline:auto}
+  .hero-in h1{font-size:clamp(36px,4.1vw,56px);max-width:11.5em;margin:20px 0 22px}
+  .hero-in .sub{font-size:19px;max-width:27em;margin-bottom:34px}
+  .hero-foot{grid-row:2;width:100%;max-width:1240px;margin-inline:auto;padding:0 var(--pad) 26px}
+  .kch{width:46px;height:46px}
+}
+
+/* ───────── БЛОКИ ───────── */
+section.blk{padding:84px 0}
+@media(min-width:900px){section.blk{padding:136px 0}}
+.blk h2{font-size:clamp(26px,3.6vw,46px);margin:16px 0 18px;max-width:14em}
+.lead{color:var(--muted);max-width:32em;font-size:18px}
+
+.bezel{padding:7px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.04)}
+.bezel>.core{border-radius:23px;background:var(--bg2);box-shadow:inset 0 1px 1px rgba(255,255,255,.14);overflow:hidden}
+
+/* что видит пассажир */
+.pass{display:grid;gap:44px;align-items:center}
+@media(min-width:900px){.pass{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px}}
+.facts{list-style:none;margin:34px 0 0;padding:0}
+.facts li{display:grid;grid-template-columns:minmax(0,9.5em) 1fr;gap:18px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line)}
+.facts li:last-child{border-bottom:1px solid var(--line)}
+.facts b{font:500 clamp(18px,2.1vw,24px)/1.2 var(--head);color:var(--orange)}
+.facts span{color:var(--muted);font-size:16px}
+@media(max-width:420px){.facts li{grid-template-columns:1fr;gap:4px}}
+
+.tv{padding:10px;border-radius:30px;background:#0a0e1b;border:1px solid var(--line)}
+.glass{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;container-type:inline-size;background:#000}
+.sl{position:absolute;inset:0;display:flex;align-items:center;gap:4cqw;padding:5cqw 6cqw;opacity:0;visibility:hidden;
+  transition:opacity .9s var(--spring),visibility 0s .9s}
+.sl.on{opacity:1;visibility:visible;transition:opacity .9s var(--spring),visibility 0s}
+.sl .art{flex:none;width:34cqw}
+.sl .tx{min-width:0}
+.sl .tt{font:700 5.2cqw/1.12 var(--head);letter-spacing:-.01em}
+.sl .ss{font:600 3.5cqw/1.35 var(--txt);margin-top:2.4cqw;opacity:.9}
+.s1{background:#10316b;color:#fff}.s1 .tt{color:#ffa05c}
+.s2{background:#ffd36b;color:#2a1700}
+.s3{background:#8fdde6;color:#06303a}
+.s4{background:var(--orange);color:#1a0a00;flex-direction:column;justify-content:center;text-align:center;gap:0}
+.s4 .tt{font-size:6cqw;max-width:16em}
+.s4 .brand{font:700 4.2cqw/1 var(--head);margin-top:4cqw;letter-spacing:.02em}
+.s4 .tel{font:700 6.4cqw/1 var(--head);margin-top:2.6cqw;background:#1a0a00;color:#fff;padding:2cqw 4cqw;border-radius:999px;white-space:nowrap}
+.spin{transform-box:fill-box;transform-origin:center}
+.sl.on .spin{animation:spin 2.2s linear infinite}
+.sl.on .steam{animation:steam 2s var(--spring) infinite}
+.sl.on .steam:nth-of-type(2){animation-delay:.5s}.sl.on .steam:nth-of-type(3){animation-delay:1s}
+.sl.on .tooth{animation:wob 1.6s var(--spring) infinite alternate}
+.sl.on .tw{animation:tw 1.2s var(--spring) infinite alternate}
+.sl.on .tw:nth-of-type(2){animation-delay:.4s}.sl.on .tw:nth-of-type(3){animation-delay:.8s}
+.steam,.tw,.tooth{transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}35%{opacity:.9}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes wob{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+@keyframes tw{from{opacity:.2;transform:scale(.5)}to{opacity:1;transform:scale(1.15)}}
+
+.tvbar{display:flex;align-items:center;gap:10px;margin-top:14px}
+.tabs{display:flex;gap:8px;flex:1;min-width:0}
+.tab{appearance:none;flex:1;min-width:0;border:0;background:transparent;color:var(--muted);cursor:pointer;text-align:left;
+  padding:10px 0 0;font:600 13px/1.25 var(--txt);position:relative;transition:color .4s var(--spring)}
+.tab::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;border-radius:3px;background:var(--line)}
+.tab .bar{position:absolute;left:0;right:0;top:0;height:3px;border-radius:3px;background:var(--orange);transform:scaleX(0);transform-origin:left}
+.tab[aria-current="true"]{color:var(--ink)}
+.tab[aria-current="true"] .bar{animation:fill var(--dur,4.5s) linear forwards}
+.tv.paused .tab .bar,.tv.still .tab .bar{animation:none}
+.tv.paused .tab[aria-current="true"] .bar,.tv.still .tab[aria-current="true"] .bar{transform:scaleX(1)}
+@keyframes fill{to{transform:scaleX(1)}}
+.pp{appearance:none;flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;
+  display:grid;place-items:center;margin-top:8px;transition:border-color .4s var(--spring)}
+.pp:hover{border-color:var(--orange)}
+.pp svg{width:16px;height:16px}
+.pp .i-play{display:none}
+.tv.paused .pp .i-play{display:block}.tv.paused .pp .i-pause{display:none}
+.tab .sh{display:none}
+@media(max-width:520px){.tab .f{display:none}.tab .sh{display:inline}.tab{font-size:12.5px}}
+.tvnote{margin-top:14px;font:500 12px/1.5 var(--mono);color:#7d90b4}
+
+/* как запустить */
+.steps{list-style:none;margin:44px 0 0;padding:0;display:grid;gap:0}
+.steps li{padding:26px 0;border-top:1px solid var(--line)}
+.steps .n{font:300 44px/1 var(--head);color:var(--orange)}
+.steps h3{font-size:20px;margin:16px 0 10px;font-weight:500}
+.steps p{color:var(--muted);font-size:16px}
+@media(min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);column-gap:36px}
+  .steps li{padding:30px 0 0}
+}
+.price{margin-top:44px}
+.price .core{display:grid;gap:12px;padding:26px 28px;align-items:center}
+.price b{font:500 clamp(22px,3vw,34px)/1.15 var(--head)}
+.price b em{font-style:normal;color:var(--orange)}
+.price span{color:var(--muted);font-size:17px}
+@media(min-width:900px){.price .core{grid-template-columns:auto 1fr;gap:44px;padding:30px 40px}}
+
+/* заявка */
+.order{display:grid;gap:48px;margin-top:44px}
+@media(min-width:960px){.order{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:72px;align-items:start}}
+.form .core{padding:24px 22px}
+@media(min-width:600px){.form .core{padding:34px}}
+.f-row{margin-bottom:18px}
+.f-row label{display:block;font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.f-row input,.f-row textarea{width:100%;font:500 16px/1.4 var(--txt);color:var(--ink);background:rgba(255,255,255,.05);
+  border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .4s var(--spring),background .4s var(--spring)}
+.f-row textarea{min-height:104px;resize:vertical}
+.f-row input::placeholder,.f-row textarea::placeholder{color:#6f83a8}
+.f-row input:focus,.f-row textarea:focus{outline:none;border-color:var(--orange);background:rgba(255,106,19,.07)}
+.ok{margin-top:14px;color:var(--orange2);font-size:15px}
+.fine{margin-top:14px;color:#7d90b4;font-size:13px;line-height:1.5}
+.cts{list-style:none;margin:0;padding:0}
+.cts li{display:flex;flex-wrap:wrap;gap:4px 18px;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid var(--line)}
+.cts li:last-child{border-bottom:1px solid var(--line)}
+.cts .k{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cts a{font:600 clamp(17px,2vw,21px)/1.3 var(--txt);text-decoration:none;transition:color .4s var(--spring);overflow-wrap:anywhere}
+.cts a:hover{color:var(--orange2)}
+.cts-note{margin-top:20px;color:var(--muted);font-size:15px}
+
+.ftr{border-top:1px solid var(--line);padding:30px 0 44px;color:#7d90b4;font-size:14px}
+.ftr .wrap{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between}
+
+/* появление при прокрутке */
+.js .rv{opacity:0;transform:translateY(30px);filter:blur(6px);transition:opacity 1s var(--spring),transform 1s var(--spring),filter 1s var(--spring)}
+.js .rv.in{opacity:1;transform:none;filter:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;filter:none;transition:none}
+  .rl,.rl.on{animation:none;transition:none}
+  .sl,.sl.on{transition:none}
+  .sl .spin,.sl .steam,.sl .tooth,.sl .tw{animation:none !important}
+  .tab .bar{animation:none !important}
+  .mapbox{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#top" aria-label="ДА-медиа, к началу"><i></i>ДА-медиа</a>
+  <nav class="nav" aria-label="Разделы">
+    <a href="#passazhir">Что видит пассажир</a>
+    <a href="#kak">Как запустить</a>
+    <a href="#zayavka">Контакты</a>
+  </nav>
+  <a class="btn btn--sm" href="#zayavka"><span class="lg">Оставить заявку</span><span class="sh">Заявка</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M7 5h8v8"/></svg></span></a>
+</header>
+
+<main id="top">
+<!-- ═════ 1. ПЕРВЫЙ ЭКРАН: живая карта города ═════ -->
+<section class="hero" aria-label="Реклама на экранах в автобусах Калининграда" data-karta>
+  <div class="stage" role="img" aria-label="Схема городских автобусных маршрутов Калининграда: маршруты подсвечиваются по очереди">
+    <div class="mapbox" data-box>
+      <img class="base" src="../../assets/karta/karta-marshrutov.jpg" width="1600" height="1117" alt="">
+      <div class="scrim-l"></div>
+      <img class="rl" data-r="4"  style="--c:#fa0a23" src="../../assets/karta/r4.png"  width="1600" height="1117" alt="">
+      <img class="rl" data-r="8"  style="--c:#00914b;--g:#19d47a" src="../../assets/karta/r8.png"  width="1600" height="1117" alt="">
+      <img class="rl" data-r="10" style="--c:#0050af;--g:#3b8cff" src="../../assets/karta/r10.png" width="1600" height="1117" alt="">
+      <img class="rl" data-r="21" style="--c:#e223aa" src="../../assets/karta/r21.png" width="1600" height="1117" alt="">
+      <img class="rl" data-r="25" style="--c:#f0b400" src="../../assets/karta/r25.png" width="1600" height="1117" alt="">
+      <img class="rl" data-r="26" style="--c:#96c81e" src="../../assets/karta/r26.png" width="1600" height="1117" alt="">
+      <img class="rl" data-r="29" style="--c:#0096e1" src="../../assets/karta/r29.png" width="1600" height="1117" alt="">
+      <img class="rl" data-r="87" style="--c:#9b6bff;--g:#b58cff" src="../../assets/karta/r87.png" width="1600" height="1117" alt="">
+      <div class="patch"></div>
+    </div>
+    <div class="fade"></div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="kchips" role="group" aria-label="Выбор маршрута на карте">
+      <button type="button" class="kch" data-r="4"  style="--c:#fa0a23" aria-pressed="false" aria-label="Маршрут 4">4</button>
+      <button type="button" class="kch" data-r="8"  style="--c:#00914b" aria-pressed="false" aria-label="Маршрут 8">8</button>
+      <button type="button" class="kch" data-r="10" style="--c:#0050af" aria-pressed="false" aria-label="Маршрут 10">10</button>
+      <button type="button" class="kch" data-r="21" style="--c:#e223aa" aria-pressed="false" aria-label="Маршрут 21">21</button>
+      <button type="button" class="kch" data-r="25" style="--c:#f0b400;--t:#1a1200" aria-pressed="false" aria-label="Маршрут 25">25</button>
+      <button type="button" class="kch" data-r="26" style="--c:#96c81e;--t:#14200a" aria-pressed="false" aria-label="Маршрут 26">26</button>
+      <button type="button" class="kch" data-r="29" style="--c:#0096e1;--t:#02131f" aria-pressed="false" aria-label="Маршрут 29">29</button>
+      <button type="button" class="kch" data-r="48" style="--c:#a3a3a3;--t:#10161f" aria-pressed="false" aria-label="Маршрут 48">48</button>
+      <button type="button" class="kch" data-r="87" style="--c:#9b6bff" aria-pressed="false" aria-label="Маршрут 87">87</button>
+      <button type="button" class="kch" data-r="88" style="--c:#14c8b4;--t:#04201c" aria-pressed="false" aria-label="Маршрут 88">88</button>
+      <button type="button" class="kmode" data-mode="auto" aria-pressed="true">По очереди</button>
+      <button type="button" class="kmode" data-mode="all" aria-pressed="false">Все сразу</button>
+    </div>
+    <p class="kinfo" data-info>10 маршрутов: 4, 8, 10, 21, 25, 26, 29, 48, 87, 88</p>
+    <p class="kcap">Схема городских автобусных маршрутов Калининграда. Маршрут 87 показан приблизительно, трасса 88 на схему не поместилась.</p>
+  </div>
+
+  <div class="hero-in">
+    <span class="eyebrow">Для местного бизнеса</span>
+    <h1>Реклама на экранах в автобусах Калининграда</h1>
+    <p class="sub">Ваш ролик идёт в салонах — у самых крупных перевозчиков Калининградской области. <b>Каждую минуту, 10 секунд, без звука.</b></p>
+    <a class="btn" href="#zayavka">Оставить заявку<span class="ar" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M7 5h8v8"/></svg></span></a>
+  </div>
+</section>
+
+<!-- ═════ 2. ЧТО ВИДИТ ПАССАЖИР ═════ -->
+<section class="blk" id="passazhir">
+  <div class="wrap pass">
+    <div class="rv">
+      <span class="eyebrow">Что видит пассажир</span>
+      <h2>Экран в салоне, пока едут до работы</h2>
+      <p class="lead">Люди смотрят в окно и на экран. Ваш ролик — короткий, яркий и понятный без слов.</p>
+      <ul class="facts">
+        <li><b>Каждую минуту</b><span>ролик выходит на экране снова</span></li>
+        <li><b>10 секунд</b><span>ровно столько длится ролик</span></li>
+        <li><b>Без звука</b><span>смысл ясен по картинке и крупным словам</span></li>
+      </ul>
+      <!-- TODO: доля мужчин/женщин, ждём данных -->
+    </div>
+
+    <div class="rv">
+      <div class="tv" data-tv>
+        <div class="glass" role="group" aria-label="Примеры роликов на экране в автобусе">
+          <!-- 1. шиномонтаж -->
+          <div class="sl s1 on" aria-hidden="false">
+            <svg class="art" viewBox="0 0 100 100" aria-hidden="true">
+              <g class="spin">
+                <circle cx="50" cy="50" r="46" fill="#161a26"/>
+                <circle cx="50" cy="50" r="41" fill="none" stroke="#3c4360" stroke-width="6" stroke-dasharray="5 3.4"/>
+                <circle cx="50" cy="50" r="30" fill="#d7deef"/>
+                <circle cx="50" cy="50" r="24" fill="#8f9bb8"/>
+                <g fill="#d7deef"><rect x="47" y="27" width="6" height="18" rx="3"/><rect x="47" y="27" width="6" height="18" rx="3" transform="rotate(72 50 50)"/><rect x="47" y="27" width="6" height="18" rx="3" transform="rotate(144 50 50)"/><rect x="47" y="27" width="6" height="18" rx="3" transform="rotate(216 50 50)"/><rect x="47" y="27" width="6" height="18" rx="3" transform="rotate(288 50 50)"/></g>
+                <circle cx="50" cy="50" r="6" fill="#161a26"/>
+              </g>
+            </svg>
+            <div class="tx"><p class="tt">Шиномонтаж</p><p class="ss">Переобуем машину быстро и аккуратно</p></div>
+          </div>
+          <!-- 2. доставка обедов -->
+          <div class="sl s2" aria-hidden="true">
+            <svg class="art" viewBox="0 0 100 100" aria-hidden="true">
+              <path class="steam" d="M32 40c-6-6 6-10 0-18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <path class="steam" d="M50 40c-6-6 6-10 0-18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <path class="steam" d="M68 40c-6-6 6-10 0-18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="50" cy="52" rx="40" ry="8" fill="#e8552b"/>
+              <path d="M10 52h80a40 36 0 0 1-80 0Z" fill="#ff6a13"/>
+              <ellipse cx="50" cy="52" rx="34" ry="5.5" fill="#f7b24a"/>
+              <circle cx="38" cy="52" r="3" fill="#e8552b"/><circle cx="58" cy="53" r="2.6" fill="#7bb24a"/>
+              <rect x="30" y="86" width="40" height="6" rx="3" fill="#2a1700" opacity=".25"/>
+            </svg>
+            <div class="tx"><p class="tt">Обеды с доставкой</p><p class="ss">Горячий суп — к вам в офис</p></div>
+          </div>
+          <!-- 3. стоматология -->
+          <div class="sl s3" aria-hidden="true">
+            <svg class="art" viewBox="0 0 100 100" aria-hidden="true">
+              <path class="tooth" d="M30 18c8-8 18-2 20 0 2-2 12-8 20 0 10 10 4 26 0 40-3 16-4 30-12 30-6 0-6-18-8-22-2 4-2 22-8 22-8 0-9-14-12-30-4-14-10-30 0-40Z" fill="#fff" stroke="#bfe6ee" stroke-width="3"/>
+              <path class="tw" d="M82 14l3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#fff"/>
+              <path class="tw" d="M14 52l2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#fff"/>
+              <path class="tw" d="M86 62l2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#fff"/>
+            </svg>
+            <div class="tx"><p class="tt">Стоматология</p><p class="ss">Здоровая улыбка без страха</p></div>
+          </div>
+          <!-- 4. финал -->
+          <div class="sl s4" aria-hidden="true">
+            <p class="tt">Здесь может быть ваша реклама</p>
+            <p class="brand">ДА-медиа</p>
+            <p class="tel">+7 (4012) 37-77-42</p>
+          </div>
+        </div>
+        <div class="tvbar">
+          <div class="tabs">
+            <button type="button" class="tab" aria-current="true" data-i="0"><span class="bar"></span><span class="f">Шиномонтаж</span><span class="sh">Шины</span></button>
+            <button type="button" class="tab" aria-current="false" data-i="1"><span class="bar"></span><span class="f">Доставка обедов</span><span class="sh">Обеды</span></button>
+            <button type="button" class="tab" aria-current="false" data-i="2"><span class="bar"></span><span class="f">Стоматология</span><span class="sh">Зубы</span></button>
+            <button type="button" class="tab" aria-current="false" data-i="3"><span class="bar"></span><span class="f">Ваша реклама</span><span class="sh">Ваша реклама</span></button>
+          </div>
+          <button type="button" class="pp" data-pp aria-label="Пауза">
+            <svg class="i-pause" viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="2" width="3.4" height="12" rx="1"/><rect x="9.6" y="2" width="3.4" height="12" rx="1"/></svg>
+            <svg class="i-play" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.4v11.2a.6.6 0 0 0 .9.5l9-5.6a.6.6 0 0 0 0-1L4.9 1.9a.6.6 0 0 0-.9.5Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="tvnote">Примеры роликов. В автобусе каждый идёт 10 секунд, здесь — для примера.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ 3. КАК ЗАПУСТИТЬ ═════ -->
+<section class="blk" id="kak" style="background:linear-gradient(180deg,var(--bg),var(--bg2) 30%,var(--bg2) 70%,var(--bg))">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Как запустить</span>
+      <h2>Четыре шага до запуска</h2>
+    </div>
+    <ol class="steps rv">
+      <li><div class="n">1</div><h3>Оставляете заявку</h3><p>Пара строк: чем занимаетесь и кого хотите привлечь.</p></li>
+      <li><div class="n">2</div><h3>Выбираем маршруты и срок</h3><p>Подбираем маршруты, где вас увидят нужные люди, и согласуем, на сколько запускаем.</p></li>
+      <li><div class="n">3</div><h3>Готовим ролик</h3><p>Присылаете свой или мы делаем: 10 секунд, без звука. Вы утверждаете.</p></li>
+      <li><div class="n">4</div><h3>Ролик выходит</h3><p>Каждую минуту на экранах в салонах автобусов.</p></li>
+    </ol>
+    <div class="price bezel rv">
+      <div class="core">
+        <b>Ролик или баннер — <em>3&nbsp;000&nbsp;₽</em></b>
+        <span>При размещении от трёх месяцев изготовление — бесплатно.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ 4. ЗАЯВКА И КОНТАКТЫ ═════ -->
+<section class="blk" id="zayavka">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">Заявка</span>
+      <h2>Напишите пару строк — мы свяжемся</h2>
+      <p class="lead">Форма откроет почту с готовым письмом. Если так неудобно — звоните или пишите в мессенджер.</p>
+    </div>
+    <div class="order">
+      <div class="form bezel rv">
+        <form class="core" data-mail>
+          <div class="f-row"><label for="f-name">Как к вам обращаться</label><input id="f-name" type="text" name="Имя" placeholder="Имя" required autocomplete="name"></div>
+          <div class="f-row"><label for="f-tel">Телефон или мессенджер</label><input id="f-tel" type="text" name="Связь" placeholder="Куда ответить" required autocomplete="tel"></div>
+          <div class="f-row"><label for="f-biz">Что рекламируем</label><input id="f-biz" type="text" name="Что рекламируем" placeholder="Кофейня, автосервис, клиника…"></div>
+          <div class="f-row"><label for="f-txt">Что важно сказать</label><textarea id="f-txt" name="Комментарий" placeholder="Сроки, пожелания к ролику"></textarea></div>
+          <button class="btn" type="submit">Отправить заявку<span class="ar" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15 15 5M7 5h8v8"/></svg></span></button>
+          <p class="ok" data-ok hidden role="status"></p>
+          <p class="fine">Отправляя форму, вы соглашаетесь, что мы свяжемся с вами по указанным контактам.</p>
+        </form>
+      </div>
+      <div class="rv">
+        <ul class="cts">
+          <li><span class="k">Телефон</span><a href="tel:+74012377742">+7 (4012) 37-77-42</a></li>
+          <li><span class="k">Почта</span><a href="mailto:info@damedia39.ru">info@damedia39.ru</a></li>
+          <li><span class="k">Telegram</span><a href="https://t.me/damedia39" target="_blank" rel="noopener">Написать в Telegram</a></li>
+          <li><span class="k">MAX</span><a href="https://max.ru/damedia39" target="_blank" rel="noopener">Написать в MAX</a></li>
+        </ul>
+        <p class="cts-note">Отвечаем в рабочее время.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ftr"><div class="wrap"><span>ДА-медиа · Калининград</span><span>Реклама на экранах в автобусах</span></div></footer>
+
+<script>
+(function(){
+'use strict';
+var still = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ── Карта: подсветка маршрутов по очереди и по нажатию ── */
+(function(){
+  var root=document.querySelector('[data-karta]'); if(!root) return;
+  var box=root.querySelector('[data-box]');
+  var layers=[].slice.call(root.querySelectorAll('.rl'));
+  var chips=[].slice.call(root.querySelectorAll('.kch'));
+  var modes=[].slice.call(root.querySelectorAll('.kmode'));
+  var info=root.querySelector('[data-info]');
+  var NAMES={"4":"мкр. Северная гора ↔ Завод «Янтарь»","8":"ул. О. Кошевого ↔ Силикатный завод","10":"мкр. Северная гора ↔ Завод «Янтарь»","21":"ул. П. Морозова ↔ Автошкола","25":"мкр. Северная гора ↔ СНТ «Медик»","26":"ул. Белорусская ↔ ул. Аксакова","29":"Завод «Янтарь» ↔ СНТ «Колосок»","48":"ДС «Янтарный» ↔ мкр. Совхозный (серая линия на схеме)","87":"ул. Аксакова ↔ завод «Янтарь» (на схеме показан приблизительно)","88":"ул. Суздальская ↔ ТЦ «Кёниг-Молл», ул. Докука (трасса вне схемы)"};
+  var CX={"48":.4,"87":.6,"88":.56,"4":.54,"8":.34,"10":.52,"21":.59,"25":.62,"26":.6,"29":.7,"all":.56};
+  var mode=still?'all':'auto', pinned=null, i=-1, timer=null, seen=true;
+  var ALL='10 маршрутов: 4, 8, 10, 21, 25, 26, 29, 48, 87, 88';
+
+  function pan(key){
+    if(innerWidth>=760){ box.style.removeProperty('--tx'); return }
+    var W=box.offsetWidth, vw=root.clientWidth;
+    var tx=Math.max(vw-W,Math.min(0,vw/2-CX[key]*W));
+    box.style.setProperty('--tx',tx+'px');
+  }
+  function show(set,key){ /* set: массив номеров, которые горят */
+    layers.forEach(function(l){ l.classList.toggle('on',set.indexOf(l.dataset.r)>-1) });
+    chips.forEach(function(c){ c.setAttribute('aria-pressed',(set.length===1&&c.dataset.r===set[0])?'true':'false') });
+    info.textContent = set.length===1 ? 'Маршрут '+set[0]+': '+NAMES[set[0]] : ALL;
+    pan(key||'all');
+  }
+  function setModeBtns(){ modes.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.mode===mode?'true':'false') }) }
+  var lit=chips.filter(function(c){return layers.some(function(l){return l.dataset.r===c.dataset.r})});
+  function step(){ i=(i+1)%lit.length; var n=lit[i].dataset.r; show([n],n) }
+  function stop(){ if(timer){ clearInterval(timer); timer=null } }
+  function play(){ if(mode!=='auto'||timer||!seen) return; step(); timer=setInterval(step,3200) }
+  function apply(){
+    stop(); setModeBtns();
+    if(mode==='all') show(lit.map(function(c){return c.dataset.r}),'all');
+    else if(mode==='pin') show([pinned],pinned);
+    else play();
+  }
+  chips.forEach(function(c){ c.addEventListener('click',function(){ mode='pin'; pinned=c.dataset.r; i=Math.max(0,lit.indexOf(c)); apply() }) });
+  modes.forEach(function(b){ b.addEventListener('click',function(){ mode=b.dataset.mode; apply() }) });
+  addEventListener('resize',function(){ var on=layers.filter(function(l){return l.classList.contains('on')}); pan(on.length===1?on[0].dataset.r:'all') });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ seen=es[0].isIntersecting; seen?play():stop() },{threshold:.2}).observe(root);
+  }
+  apply();
+})();
+
+/* ── Ролики на экране: автопрокрутка с паузой ── */
+(function(){
+  var tv=document.querySelector('[data-tv]'); if(!tv) return;
+  var slides=[].slice.call(tv.querySelectorAll('.sl'));
+  var tabs=[].slice.call(tv.querySelectorAll('.tab'));
+  var pp=tv.querySelector('[data-pp]');
+  var DUR=4500, cur=0, timer=null, paused=still, visible=false;
+  tv.style.setProperty('--dur',DUR+'ms');
+  if(still){ tv.classList.add('still'); pp.hidden=true }
+  function go(n){
+    cur=n;
+    slides.forEach(function(s,k){ s.classList.toggle('on',k===n); s.setAttribute('aria-hidden',k===n?'false':'true') });
+    tabs.forEach(function(t,k){ t.setAttribute('aria-current',k===n?'true':'false') });
+    /* перезапуск полоски времени */
+    var b=tabs[n].querySelector('.bar'); b.style.animation='none'; void b.offsetWidth; b.style.animation='';
+  }
+  function tick(){ go((cur+1)%slides.length) }
+  function run(){ if(paused||timer||!visible) return; timer=setInterval(tick,DUR); go(cur) }
+  function halt(){ if(timer){ clearInterval(timer); timer=null } }
+  tabs.forEach(function(t){ t.addEventListener('click',function(){ go(+t.dataset.i); if(!paused){ halt(); run() } }) });
+  pp.addEventListener('click',function(){
+    paused=!paused; tv.classList.toggle('paused',paused);
+    pp.setAttribute('aria-label',paused?'Запустить':'Пауза');
+    paused?halt():run();
+  });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ visible=es[0].isIntersecting; visible?run():halt() },{threshold:.4}).observe(tv);
+  } else { visible=true; run() }
+})();
+
+/* ── Появление при прокрутке ── */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(!('IntersectionObserver' in window)||still){ els.forEach(function(e){e.classList.add('in')}); return }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target) } }) },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(e){ io.observe(e) });
+})();
+
+/* ── Заявка: открывается письмо на ту же почту, что и в основном сайте ── */
+(function(){
+  var f=document.querySelector('form[data-mail]'); if(!f) return;
+  var MAIL='info@damedia39.ru';
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var lines=[]; new FormData(f).forEach(function(v,k){ if(String(v).trim()) lines.push(k+': '+v) });
+    var page=location.pathname.split('/').slice(-2).join('/'); try{ page=decodeURIComponent(page) }catch(x){}
+    var body='Заявка с сайта ДА-медиа\n\n'+lines.join('\n')+'\n\nСтраница: '+page;
+    location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Заявка на рекламу — ДА-медиа')+'&body='+encodeURIComponent(body);
+    var ok=f.querySelector('[data-ok]'); ok.hidden=false; ok.textContent='Открываем почту… Если окно не появилось — пишите на '+MAIL;
+  });
+})();
+})();
+</script>
+</body>
+</html>

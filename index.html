@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23071a3d%27/%3E%3Crect x=%277%27 y=%2711%27 width=%2718%27 height=%2711%27 rx=%273%27 fill=%27none%27 stroke=%27%23ff6a13%27 stroke-width=%273%27/%3E%3C/svg%3E">
+<title>ДА-медиа — реклама на экранах в автобусах Калининграда</title>
+<meta name="description" content="Сеть экранов в салонах автобусов самых крупных перевозчиков Калининградской области: около 40&nbsp;000 контактов в день.">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+/* кнопки и поля сами шрифт страницы не наследуют — без этой строки браузер рисует их Arial */
+button,input,select,textarea{font-family:inherit}
+
+/* --- палитра и основа --- */
+:root{
+  --bg:#050f26;
+  --blue:#071a3d;
+  --blue2:#0e2f68;
+  --card:#0b2444;
+  --orange:#ff6a13;
+  --orange2:#ffa05c;
+  --ink:#eaf1ff;
+  --muted:#8ba1c9;
+  --line:rgba(255,255,255,.11);
+  --hh:64px;            /* высота липкой шапки */
+  --pad:20px;
+  --maxw:1180px;
+  --txt:MAN,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --disp:UNB,MAN,system-ui,sans-serif;
+}
+@media(min-width:768px){ :root{--hh:72px;--pad:32px} }
+@media(min-width:1200px){ :root{--pad:40px} }
+
+*,*::before,*::after{box-sizing:border-box}
+*{min-width:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+body{
+  margin:0;
+  overflow-x:clip;
+  background:var(--bg);
+  color:var(--ink);
+  font:400 17px/1.62 var(--txt);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+u{text-decoration:none}
+ul,ol{margin:0;padding:0;list-style:none}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:700;letter-spacing:-.025em}
+:focus-visible{outline:2px solid var(--orange2);outline-offset:3px;border-radius:4px}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad)}
+/* Переход по пункту меню: якорь встаёт ниже липкой шапки — высота шапки плюс
+   28px. Те же поля у чекбоксов, кнопок срока, строк таблицы и полей формы,
+   чтобы они не оказывались под шапкой при переходе и при обходе по Tab. */
+[id]{scroll-margin-top:calc(var(--hh) + 28px)}
+.da-chk,.da-term,.tbl tbody tr,.tbl tfoot tr,
+.form input,.form textarea{scroll-margin-top:calc(var(--hh) + 28px)}
+.sec{padding-block:clamp(56px,8vw,112px)}
+.sec--blue{background:var(--blue)}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+h1{font-size:clamp(31px,5.4vw,60px);line-height:1.08;text-wrap:balance}
+/* На широком экране h1 стоит в узкой колонке: при 60px он ломался на пять
+   строк, и последней висело одинокое «автобусов». Мера колонки чуть шире,
+   кегль ниже, последние два слова связаны — выходит три ровные строки. */
+@media(min-width:1000px){
+  h1{font-size:clamp(37px,3.5vw,44px);line-height:1.1}
+  h1 .nw{white-space:nowrap}
+}
+h2{font-size:clamp(26px,3.5vw,42px);line-height:1.14}
+h3{font-size:clamp(19px,1.5vw,22px);line-height:1.3;font-weight:500;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:clamp(17px,1.4vw,19px);line-height:1.6;max-width:64ch}
+.lbl{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;
+     letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.lbl::before{content:"";flex:none;width:22px;height:1px;background:var(--orange)}
+.sec-h{display:grid;gap:14px;margin-bottom:clamp(30px,4vw,52px)}
+.note{color:var(--muted);font-size:16px;line-height:1.55}
+
+/* --- кнопки --- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:52px;padding:0 26px;border-radius:13px;border:1px solid transparent;
+  font:700 16px/1.2 var(--txt);letter-spacing:.01em;cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s}
+.btn-p{background:var(--orange);color:var(--bg)}
+.btn-p:hover{background:var(--orange2)}
+.btn-g{border-color:rgba(255,255,255,.38);color:var(--ink);background:transparent;font-weight:500}
+.btn-g:hover{border-color:var(--orange);color:var(--orange2)}
+.btn-tel{min-width:212px}
+.btn-sm{min-height:42px;padding:0 18px;font-size:15px;border-radius:11px}
+
+/* --- шапка --- */
+.hdr{position:sticky;top:0;z-index:60;height:var(--hh);
+  background:rgba(5,15,38,.74);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+.hdr.on{background:rgba(5,15,38,.94);border-bottom-color:var(--line)}
+.hdr .wrap{height:100%;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:700;
+  font-size:18px;letter-spacing:-.02em;white-space:nowrap}
+.logo::before{content:"";width:18px;height:12px;border:1px solid var(--orange);border-radius:3px;flex:none}
+.nav{display:none;margin-left:auto;gap:28px;font-size:16px;color:var(--muted)}
+.nav a{transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.hdr .btn{margin-left:auto}
+/* Горизонтальная строка разделов помещается целиком только от 920px.
+   Всё, что уже, — бургер: пунктов не теряем, просто складываем в список. */
+@media(min-width:920px){
+  .nav{display:flex}
+  .hdr .btn{margin-left:0}
+}
+@media(max-width:479px){
+  .hdr .wrap{gap:8px}
+  .logo{gap:9px;font-size:clamp(16px,4.3vw,18px)}
+  .hdr .btn{padding:0 clamp(10px,3vw,14px);font-size:clamp(14px,3.85vw,15px)}
+}
+
+/* --- бургер и меню узких экранов --- */
+.burger{flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:12px;
+  background:transparent;color:var(--ink);cursor:pointer;
+  transition:border-color .2s,color .2s}
+.burger:hover{border-color:var(--orange);color:var(--orange2)}
+.burger i,.burger i::before,.burger i::after{display:block;width:18px;height:1.5px;
+  border-radius:2px;background:currentColor;transition:transform .22s ease,background .18s}
+.burger i{position:relative}
+.burger i::before{content:"";position:absolute;left:0;top:-6px}
+.burger i::after{content:"";position:absolute;left:0;top:6px}
+.burger[aria-expanded="true"]{border-color:var(--orange);color:var(--orange2)}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] i::after{transform:translateY(-6px) rotate(-45deg)}
+
+.mnu{position:fixed;left:0;right:0;top:var(--hh);z-index:61;padding-block:6px 18px;
+  max-height:calc(100vh - var(--hh) - 18px);overflow-y:auto;overscroll-behavior:contain}
+@supports(height:100dvh){ .mnu{max-height:calc(100dvh - var(--hh) - 18px)} }
+.mnu .scr{animation:mnu-v .22s cubic-bezier(.22,1,.36,1) both}
+@keyframes mnu-v{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.mnu-x{margin-left:auto;min-width:44px;min-height:44px;padding:0 6px;border:0;
+  background:none;color:var(--muted);font:500 14px/1.2 var(--txt);letter-spacing:.13em;
+  text-transform:uppercase;cursor:pointer;transition:color .2s}
+.mnu-x:hover{color:var(--orange2)}
+.mnu-in{padding:4px 6px 16px}
+.mnu-in li + li{border-top:1px solid var(--line)}
+.mnu-in li a{display:flex;align-items:center;min-height:52px;padding:6px 12px;
+  font-size:17px;line-height:1.3;transition:color .2s}
+.mnu-in li a:hover{color:var(--orange2)}
+.mnu-go{width:calc(100% - 24px);margin:16px 12px 4px}
+.mnu-back{position:fixed;inset:0;z-index:55;background:rgba(5,15,38,.66);touch-action:none}
+.mnu[hidden],.mnu-back[hidden]{display:none}
+/* пока меню открыто, страница за ним не прокручивается */
+html.mnu-open,html.mnu-open body{overflow:hidden}
+@media(min-width:920px){ .burger,.mnu,.mnu-back{display:none !important} }
+
+/* --- рамка монитора --- */
+.scr{position:relative;padding:11px;border:1px solid rgba(255,106,19,.30);border-radius:20px;
+  background:var(--blue);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
+.scr-bar{display:flex;align-items:center;gap:10px;padding:5px 8px 12px;
+  font-size:14px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.scr-bar .dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--orange);
+  box-shadow:0 0 0 4px rgba(255,106,19,.15)}
+.scr-bar .r{margin-left:auto;letter-spacing:.08em;text-transform:none;color:var(--muted)}
+.scr-in{position:relative;border:1px solid var(--line);border-radius:12px;background:var(--bg);overflow:hidden}
+
+/* ролик внутри рамки */
+.spot{display:grid}
+.spot::before{content:"";grid-area:1/1;width:100%;align-self:start;aspect-ratio:4/3}
+@media(min-width:520px){ .spot::before{aspect-ratio:16/9} }
+.slide{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(8px,1.4vw,14px);padding:clamp(18px,3.4vw,36px);
+  opacity:0;visibility:hidden;transform:translateY(12px);pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s}
+.slide.on{opacity:1;visibility:visible;transform:none;
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear 0s}
+.slide .k{font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+.slide .big{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(22px,3.3vw,38px);line-height:1.14}
+.slide .sub{color:var(--muted);font-size:clamp(16px,1.4vw,18px);line-height:1.45}
+.slide .tel{margin-top:2px;font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:.02em;
+  font-variant-numeric:tabular-nums}
+.prog{height:2px;margin:12px 9px 4px;background:rgba(255,255,255,.40);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--orange);border-radius:2px}
+.ctl{display:flex;align-items:center;gap:10px;padding:4px 5px 2px}
+.dots{display:flex;gap:4px}
+.dots button{appearance:none;background:none;border:0;padding:11px 6px;cursor:pointer;line-height:0}
+.dots button span{display:block;width:26px;height:3px;border-radius:2px;background:rgba(255,255,255,.40);transition:background .25s}
+.dots button[aria-current="true"] span{background:var(--orange2)}
+.pauza{appearance:none;margin-left:auto;background:none;border:0;padding:8px 4px;min-height:24px;
+  color:var(--muted);font:500 14px/1.2 var(--txt);letter-spacing:.13em;text-transform:uppercase;
+  cursor:pointer;transition:color .2s}
+.pauza:hover{color:var(--orange2)}
+.scr-cap{margin-top:14px;color:var(--muted);font-size:15px;line-height:1.5}
+
+/* --- первый экран --- */
+.hero{padding-top:clamp(34px,6vw,70px);padding-bottom:clamp(52px,8vw,104px)}
+.hero-grid{display:grid;gap:clamp(30px,5vw,56px)}
+@media(min-width:1000px){
+  .hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.96fr);align-items:center;gap:64px}
+}
+.hero-txt{display:grid;gap:clamp(18px,2.4vw,26px);align-content:start}
+.mk{margin:14px 0 0;max-width:64ch;color:var(--ink);font-size:17px;line-height:1.5;padding-left:14px;border-left:2px solid var(--orange)}
+.mk b{color:var(--orange2)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:grid;gap:0;margin-top:6px}
+.facts li{border-top:1px solid var(--line);padding:14px 0}
+@media(min-width:520px){ .facts{grid-template-columns:repeat(3,1fr);column-gap:24px} }
+/* Кегль подобран так, чтобы самое длинное слово («маршрутов») помещалось
+   в треть колонки: при 24px оно шире ячейки и наезжало на соседнюю.
+   overflow-wrap — страховка на случай ещё более длинного слова. */
+.facts b{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(18px,1.35vw,22px);
+  line-height:1.2;letter-spacing:-.02em;overflow-wrap:anywhere}
+.facts span{display:block;margin-top:4px;color:var(--muted);font-size:15px;line-height:1.4}
+
+/* --- что видит пассажир --- */
+.pass{display:grid;gap:clamp(28px,4vw,54px)}
+@media(min-width:900px){ .pass{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:start;gap:clamp(36px,4vw,64px)} }
+/* margin-inline:0 — это <figure>, у него браузерные поля 40px по бокам */
+.foto{margin-inline:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card)}
+.foto img{width:100%;object-fit:cover;object-position:50% 45%;aspect-ratio:4/5;
+  filter:saturate(.2) contrast(1.04)}
+@media(max-width:899px){ .foto img{aspect-ratio:16/11} }
+.foto figcaption{padding:14px 18px 16px;color:var(--muted);font-size:15px;line-height:1.5;
+  border-top:1px solid var(--line)}
+.pass-list{display:grid;gap:0}
+.pass-list li{border-top:1px solid var(--line);padding:20px 0 22px}
+.pass-list h3{margin-bottom:7px}
+.pass-list p{color:var(--muted);font-size:16px;line-height:1.55}
+
+/* круг в одну минуту */
+.krug{margin-top:26px;padding:22px 0 0;border-top:1px solid var(--line)}
+.krug-h{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin-bottom:14px}
+.krug-h b{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.krug-h span{color:var(--muted);font-size:15px}
+.slots{display:flex;gap:3px}
+.slots i{flex:1 1 0;height:22px;border-radius:2px;background:rgba(255,255,255,.09)}
+.slots i.on{background:var(--orange);box-shadow:0 0 0 1px rgba(255,106,19,.35)}
+.krug p{margin-top:12px;color:var(--muted);font-size:16px;line-height:1.55}
+
+/* --- калькулятор --- */
+.calc{display:grid;gap:clamp(30px,4vw,46px)}
+@media(min-width:1000px){
+  .calc{grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:start;gap:56px}
+  .calc-out{position:sticky;top:calc(var(--hh) + 20px)}
+}
+.calc-sub{margin-bottom:14px;font-size:14px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.calc-block + .calc-block{margin-top:clamp(26px,3vw,36px)}
+
+/* районы: label.da-chk > input + i + b + span + u */
+[data-calc-districts]{border-top:1px solid var(--line)}
+@media(min-width:620px) and (max-width:999px){
+  [data-calc-districts]{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+}
+.da-chk{position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) auto;
+  column-gap:14px;row-gap:3px;align-items:center;padding:15px 2px;
+  border-bottom:1px solid var(--line);cursor:pointer;transition:color .2s}
+.da-chk input{position:absolute;opacity:0;width:22px;height:22px;margin:0;cursor:pointer}
+.da-chk i{grid-column:1;grid-row:1;width:21px;height:21px;border:1px solid rgba(255,255,255,.38);
+  border-radius:6px;transition:background .18s,border-color .18s;position:relative}
+.da-chk i::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;
+  border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(42deg) scale(.6);
+  opacity:0;transition:opacity .18s,transform .18s}
+.da-chk input:checked + i{background:var(--orange);border-color:var(--orange)}
+.da-chk input:checked + i::after{opacity:1;transform:rotate(42deg) scale(1)}
+.da-chk input:focus-visible + i{outline:2px solid var(--orange2);outline-offset:3px}
+.da-chk b{grid-column:2;grid-row:1;font-weight:500;font-size:17px;line-height:1.3}
+.da-chk span{grid-column:2;grid-row:2;color:var(--muted);font-size:15px;line-height:1.35}
+.da-chk u{grid-column:3;grid-row:1;color:var(--muted);font-size:15px;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.da-chk:hover b{color:var(--orange2)}
+.da-chk.off b{color:var(--muted);font-weight:400}
+.da-chk.off u{text-decoration:line-through;text-decoration-thickness:1px}
+
+/* сроки: button.da-term > b + span */
+[data-calc-terms]{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){ [data-calc-terms]{grid-template-columns:repeat(4,1fr);gap:12px} }
+.da-term{display:grid;gap:5px;justify-items:center;align-content:center;min-height:74px;
+  padding:12px 8px;border:1px solid var(--line);border-radius:13px;background:transparent;
+  color:var(--ink);font-family:var(--txt);cursor:pointer;transition:border-color .2s,background .2s}
+.da-term b{font-family:var(--disp);font-weight:700;font-size:21px;line-height:1.1;letter-spacing:-.02em}
+.da-term span{font-size:14px;color:var(--muted);text-align:center;line-height:1.25}
+.da-term:hover{border-color:rgba(255,255,255,.28)}
+.da-term.on{border-color:var(--orange);background:rgba(255,106,19,.08)}
+.da-term.on b{color:var(--orange2)}
+.da-term.on span{color:var(--ink)}
+
+/* смета */
+.smeta{padding:clamp(20px,2.6vw,28px) clamp(18px,2.4vw,26px) clamp(22px,2.6vw,28px)}
+.smeta .cap{font-size:16px;color:var(--muted)}
+.price{font-family:var(--disp);font-weight:700;font-size:clamp(30px,4.6vw,48px);line-height:1.1;
+  letter-spacing:-.035em;margin-top:6px;font-variant-numeric:tabular-nums}
+.smeta .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:12px;font-size:16px;color:var(--muted)}
+.smeta .disc{padding:4px 11px;border:1px solid var(--line);border-radius:20px;font-size:14px}
+.smeta .disc.on{border-color:rgba(255,106,19,.5);color:var(--orange2)}
+.smeta .baza{margin-top:9px;color:var(--muted);font-size:16px;line-height:1.5}
+.smeta .empty{margin-top:14px;color:var(--orange2);font-size:16px;line-height:1.5}
+.smeta ul{margin-top:20px;border-top:1px solid var(--line)}
+.smeta li{display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+  padding:13px 0;border-bottom:1px solid var(--line)}
+.smeta li .k{color:var(--muted);font-size:16px}
+.smeta li .v{font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.smeta .go{margin-top:20px;display:grid;gap:12px}
+.smeta .go .btn{width:100%}
+
+/* --- цифры сети --- */
+.nums{display:grid}
+@media(min-width:700px){ .nums{grid-template-columns:1fr 1fr;column-gap:clamp(32px,4vw,56px)} }
+@media(min-width:1100px){ .nums{grid-template-columns:repeat(3,1fr)} }
+.nums li{border-top:1px solid var(--line);padding:22px 0 26px}
+.nums .n{color:var(--ink);display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;
+  font-family:var(--disp);font-weight:700;font-size:clamp(29px,3.2vw,40px);line-height:1.1;
+  letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.nums .n em{font-family:var(--txt);font-style:normal;font-weight:500;font-size:16px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.nums p{margin-top:10px;color:var(--muted);font-size:16px;line-height:1.55}
+
+/* --- районы: таблица и карточки --- */
+.band{margin-inline:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:clamp(28px,3.4vw,44px)}
+.band img{width:100%;aspect-ratio:1900/814;object-fit:cover;max-height:280px}
+.band figcaption{padding:14px 18px 16px;border-top:1px solid var(--line);color:var(--muted);
+  font-size:15px;line-height:1.5;background:var(--card)}
+.tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tbl th{text-align:left;padding:0 14px 14px 0;border-bottom:1px solid var(--line);
+  font:500 14px/1.35 var(--txt);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tbl td{padding:17px 14px 17px 0;border-bottom:1px solid var(--line);font-size:17px;vertical-align:middle}
+.tbl td:last-child,.tbl th:last-child{padding-right:0}
+.tbl .nm b{display:block;font-weight:500;font-size:17px}
+.tbl .nm span{display:block;margin-top:3px;color:var(--muted);font-size:15px}
+.tbl .v{font-weight:700;white-space:nowrap}
+.shr{display:flex;align-items:center;gap:12px}
+.shr b{font-weight:700;white-space:nowrap;min-width:52px}
+.bar{flex:1 1 60px;height:4px;border-radius:3px;background:rgba(255,255,255,.09);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--orange);border-radius:3px}
+.tbl tfoot td{border-bottom:0;border-top:1px solid rgba(255,106,19,.45);font-weight:700;padding-top:18px}
+.tbl tfoot .nm b{font-weight:700}
+.tbl tfoot .bar i{background:var(--orange2)}
+.summa{margin-top:20px;color:var(--muted);font-size:16px;line-height:1.6}
+.summa b{color:var(--ink);font-weight:700}
+
+@media(max-width:720px){
+  .tbl,.tbl tbody,.tbl tfoot,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .tbl tr{border:1px solid var(--line);border-radius:15px;background:var(--card);
+    padding:16px 18px 14px;margin-bottom:12px}
+  .tbl td{border-bottom:0;padding:7px 0;display:flex;justify-content:space-between;
+    align-items:baseline;gap:18px}
+  .tbl td::before{content:attr(data-l);color:var(--muted);font-size:15px;flex:none}
+  .tbl td.nm{display:block;padding:0 0 13px;margin-bottom:9px;border-bottom:1px solid var(--line)}
+  .tbl td.nm::before{content:none}
+  .tbl td.sh{display:block}
+  .tbl td.sh::before{display:block;margin-bottom:9px}
+  .tbl tfoot tr{border-color:rgba(255,106,19,.45);background:transparent}
+  .tbl tfoot td{border-top:0;padding-top:7px}
+  .tbl tfoot td.nm{padding-top:0}
+}
+
+/* --- как запустить --- */
+.steps{display:grid}
+@media(min-width:700px){ .steps{grid-template-columns:1fr 1fr;column-gap:clamp(32px,4vw,48px)} }
+@media(min-width:1100px){ .steps{grid-template-columns:repeat(4,1fr);column-gap:40px} }
+.steps li{border-top:1px solid var(--line);padding:20px 0 26px}
+.steps .st{margin-bottom:11px;font-size:14px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--orange)}
+.steps h3{margin-bottom:9px}
+.steps p{color:var(--muted);font-size:16px;line-height:1.55}
+
+/* --- заявка --- */
+.order{display:grid;gap:clamp(30px,4vw,52px)}
+@media(min-width:960px){ .order{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(40px,4vw,64px);align-items:start} }
+.form{padding:clamp(20px,2.6vw,30px) clamp(18px,2.4vw,28px) clamp(24px,2.6vw,30px)}
+.f-row{display:grid;gap:8px;margin-bottom:16px}
+.f-row label{font-size:15px;color:var(--muted)}
+.form input[type=text],.form input[type=tel],.form textarea{
+  width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:12px;
+  background:rgba(255,255,255,.03);color:var(--ink);font:400 17px/1.45 var(--txt);
+  transition:border-color .2s,background .2s}
+.form textarea{min-height:104px;resize:vertical}
+.form input::placeholder,.form textarea::placeholder{color:var(--muted);opacity:1}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--orange);background:rgba(255,106,19,.05)}
+.form .btn{width:100%;margin-top:6px}
+.form .ok{margin-top:14px;color:var(--orange2);font-size:16px;line-height:1.5}
+.form .fine{margin-top:14px;color:var(--muted);font-size:15px;line-height:1.5}
+.cts{margin-top:18px}
+.cts li{display:grid;gap:4px;padding:15px 0;border-top:1px solid var(--line)}
+.cts .k{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cts a{font-size:18px;font-weight:500;transition:color .2s}
+.cts a:hover{color:var(--orange2)}
+.cts a[data-phone]{color:var(--orange2);cursor:pointer;font-variant-numeric:tabular-nums}
+.cts a[data-phone].open{color:var(--ink)}
+
+/* --- подвал --- */
+.ftr{background:var(--blue);border-top:1px solid var(--line);padding-block:clamp(40px,5vw,60px) 34px}
+.ftr-grid{display:grid;gap:30px}
+@media(min-width:760px){ .ftr-grid{grid-template-columns:1.3fr 1fr 1fr;gap:40px} }
+.ftr h4{margin:0 0 14px;font-size:14px;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted)}
+.ftr li{padding:6px 0}
+.ftr li a{font-size:16px;transition:color .2s}
+.ftr li a:hover{color:var(--orange2)}
+.ftr .about{color:var(--muted);font-size:16px;line-height:1.6;max-width:42ch;margin-top:14px}
+.ftr .base{margin-top:34px;padding-top:22px;border-top:1px solid var(--line);
+  display:grid;gap:10px;color:var(--muted);font-size:15px;line-height:1.55}
+@media(min-width:760px){ .ftr .base{grid-template-columns:1fr auto;align-items:end} }
+
+/* --- курсор движка --- */
+.da-cur-dot,.da-cur-ring{position:fixed;left:0;top:0;z-index:90;pointer-events:none;opacity:0}
+.da-cur-dot{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--orange)}
+.da-cur-ring{width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;
+  border:1px solid transparent;transition:border-color .25s,opacity .25s}
+.da-cur-ring.on{border-color:rgba(255,160,92,.55)}
+.da-cur-ring.press{border-color:var(--orange)}
+html.da-cursor-on,html.da-cursor-on body,html.da-cursor-on a,html.da-cursor-on button,
+html.da-cursor-on label,html.da-cursor-on .da-chk input{cursor:none}
+html.da-cursor-on input[type=text],html.da-cursor-on input[type=tel],html.da-cursor-on textarea{cursor:text}
+@media(hover:none){ .da-cur-dot,.da-cur-ring{display:none} }
+
+@media(prefers-reduced-motion:reduce){
+  .slide{transition:none}
+  .prog{display:none}
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important}
+}
+
+/* подпись к фотографиям: лицензии CC BY требуют указания авторов */
+.foto-credit{display:block;margin-top:10px;font-size:13px;line-height:1.5;
+  color:var(--muted);opacity:.75}
+
+/* ── автобус из «Ночной линии» в первом экране ───────────────────── */
+.bus-card{position:relative;margin-bottom:0;border:1px solid rgba(255,106,19,.30);border-radius:20px;overflow:hidden;
+  background:#050d1e;aspect-ratio:380/290;background:#02060e}
+.bus-card>svg{position:absolute;inset:0;width:100%;height:100%;filter:brightness(1.55) saturate(1.1)}
+.bus-card svg{display:block;width:100%;height:100%}
+.lay{will-change:transform}
+.far{animation:run 96s linear infinite}
+.mid{animation:run 44s linear infinite}
+.road{animation:run 2.4s linear infinite}
+@keyframes run{from{transform:translateX(0)}to{transform:translateX(-1600px)}}
+.ride{transform-box:view-box;transform-origin:0 0;transform:translate(660px,294.4px) scale(.6)}
+.bus{animation:bob 1.25s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+.whl{transform-box:fill-box;transform-origin:center;animation:spin .82s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ad1,.ad2,.ad3{animation:ads 9.6s linear infinite}
+.ad2,.ad3{opacity:0}
+.ad2{animation-delay:3.2s}.ad3{animation-delay:6.4s}
+@keyframes ads{0%{opacity:0}1.5%{opacity:1}30%{opacity:1}33.3%{opacity:0}100%{opacity:0}}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.8s ease-out infinite}
+@keyframes ping{0%{transform:scale(.7);opacity:.75}70%{transform:scale(1.45);opacity:0}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.lay,.bus,.whl,.ping,.ad1,.ad2,.ad3{animation:none !important}.ad1{opacity:1}}
+
+/* ── экран в автобусе: мультяшные ролики ───────────────────────────── */
+.scr-on-bus{position:absolute;left:9%;right:6%;top:9%;bottom:30%;display:flex;flex-direction:column;
+  padding:7px;border:0;border-radius:14px;background:#02060e;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 38px rgba(255,138,60,.35)}
+.scr-on-bus .scr-in{flex:1;min-height:0;border:0;border-radius:8px;background:#000}
+.scr-on-bus .spot{height:100%}
+.scr-on-bus .spot::before{display:none}
+.scr-on-bus .prog{display:none}
+.scr-on-bus .ctl{padding:0 2px;margin-top:2px;min-height:18px}
+.scr-on-bus .dots button{padding:6px 4px}
+.scr-on-bus .dots button span{width:18px;height:3px}
+.scr-on-bus .pauza{padding:2px 4px;font-size:11px}
+.scr-on-bus .slide{display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:6px;
+  padding:0 0 0 clamp(10px,1.5vw,18px);background:var(--bg-s,#ffd23f);color:#0a1a33;overflow:hidden}
+.scr-on-bus .slide .txt{display:flex;flex-direction:column;gap:clamp(4px,.7vw,8px);min-width:0}
+.scr-on-bus .slide .k{align-self:flex-start;padding:3px 9px;border-radius:99px;background:#0a1a33;color:#fff;
+  font-size:clamp(9px,.9vw,11px);letter-spacing:.12em}
+.scr-on-bus .slide .big{font-size:clamp(14px,1.6vw,20px);line-height:1.1;letter-spacing:-.02em;color:#0a1a33}
+.scr-on-bus .slide .sub{display:none}
+.scr-on-bus .slide .tel{align-self:flex-start;margin:0;padding:3px 9px;border-radius:8px;background:#0a1a33;color:#fff;
+  font-size:clamp(11px,1.2vw,15px)}
+.scr-on-bus .slide svg{width:100%;height:100%;max-height:100%;display:block}
+.sl1{--bg-s:#f4bd3a}.sl2{--bg-s:#ff8f55}.sl3{--bg-s:#cfeaff}.sl4{--bg-s:#0b2a5c}
+.scr-on-bus .sl4 .big{color:#fff}.scr-on-bus .sl4 .k{background:#ff6a13;color:#06142e}.scr-on-bus .sl4 .tel{background:#ff6a13;color:#06142e}
+/* движение героев: идёт только у показываемого ролика */
+.art *{transform-box:fill-box;transform-origin:center}
+.slide.on .tire{animation:tspin 2.2s linear infinite}
+.slide.on .hand{animation:tspin 6s linear infinite}
+.slide.on .stm{animation:steam 1.8s ease-in infinite}
+.slide.on .stm:nth-child(2){animation-delay:.6s}.slide.on .stm:nth-child(3){animation-delay:1.2s}
+.slide.on .bowl{animation:hop 1.4s ease-in-out infinite alternate}
+.slide.on .spark{animation:tw 1.2s ease-in-out infinite}
+.slide.on .spark.b{animation-delay:.5s}
+.slide.on .tooth{animation:hop 1.6s ease-in-out infinite alternate}
+.slide.on .play{animation:pls 1.2s ease-in-out infinite alternate}
+.slide.on .art{animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes tspin{to{transform:rotate(360deg)}}
+@keyframes wob{from{transform:rotate(-14deg)}to{transform:rotate(10deg)}}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}30%{opacity:.9}100%{opacity:0;transform:translateY(-16px)}}
+@keyframes hop{from{transform:translateY(2px)}to{transform:translateY(-4px)}}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.5)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes pls{from{transform:scale(.9)}to{transform:scale(1.12)}}
+@keyframes pop{from{opacity:0;transform:scale(.6) rotate(-6deg)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.slide .art,.slide .art *{animation:none !important}}
+@media(max-width:560px){.bus-card{aspect-ratio:380/290}.scr-on-bus{left:7%;right:4%;top:13%;bottom:32%}
+  .scr-on-bus .slide{padding-left:10px}.scr-on-bus .slide .big{font-size:14px}}
+
+@media(max-width:999px){
+  .hero-txt{display:contents}
+  .hero-grid{gap:20px}
+  .hero-grid .lbl{order:1}.hero-grid h1{order:2}.hero-grid .lead{order:3}
+  .hero-grid>div[data-rv]:not(.hero-txt){order:4}
+  .hero-grid .mk{order:5;margin:0}.hero-grid .hero-cta{order:6}.hero-grid .facts{order:7}
+}
+@media(max-width:720px){.ft-nav{display:none}}
+/* ── карта маршрутов ─────────────────────────────────── */
+.kwrap{max-width:none}
+.kscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:20px}
+.khint{display:none;margin:8px 0 0;color:var(--muted);font-size:14px}
+@media(max-width:700px){.kmap{min-width:760px}.khint{display:block}}
+.kmap{position:relative;border-radius:20px;overflow:hidden;background:#e9edf2;
+  border:1px solid rgba(255,106,19,.30);box-shadow:0 18px 60px rgba(0,0,0,.45);aspect-ratio:1600/1117}
+.kmap img{position:absolute;inset:0;width:100%;height:100%;display:block;max-width:none}
+.kbase{transition:filter .5s ease}
+.kmap.focus .kbase{filter:saturate(.12) brightness(1.06) contrast(.9)}
+.rl{opacity:0;pointer-events:none;transition:opacity .45s ease}
+.rl.on{opacity:1;filter:drop-shadow(0 0 5px var(--c)) drop-shadow(0 0 12px var(--c));
+  -webkit-mask-image:linear-gradient(105deg,#000 0,#000 34%,rgba(0,0,0,.28) 46%,#000 58%,#000 100%);
+  mask-image:linear-gradient(105deg,#000 0,#000 34%,rgba(0,0,0,.28) 46%,#000 58%,#000 100%);
+  -webkit-mask-size:260% 100%;mask-size:260% 100%;animation:ksweep 2.6s linear infinite}
+@keyframes ksweep{from{-webkit-mask-position:100% 0;mask-position:100% 0}to{-webkit-mask-position:0 0;mask-position:0 0}}
+.kctl{margin-top:18px;display:grid;gap:12px}
+.kchips{display:flex;flex-wrap:wrap;gap:8px}
+.kch{appearance:none;border:2px solid var(--c);background:transparent;color:var(--ink);
+  min-width:48px;height:48px;border-radius:999px;cursor:pointer;font:700 17px/1 var(--txt);padding:0;
+  transition:background .2s,color .2s,transform .2s}
+.kch i{font-style:normal}
+.kch:hover{background:color-mix(in srgb,var(--c) 28%,transparent)}
+.kch[aria-pressed="true"]{background:var(--c);color:#06142e;transform:scale(1.06)}
+.kall{appearance:none;border:1px solid var(--line);background:transparent;color:var(--muted);
+  height:48px;padding:0 18px;border-radius:999px;cursor:pointer;font:500 15px/1 var(--txt)}
+.kall:hover,.kall[aria-pressed="true"]{border-color:var(--orange);color:var(--orange2)}
+.kinfo{margin:0;min-height:1.6em;color:var(--ink);font-size:17px;line-height:1.5}
+.kbig{justify-self:start;color:var(--orange2);font-size:16px;text-decoration:underline;text-underline-offset:3px;padding:6px 0}
+@media(prefers-reduced-motion:reduce){.rl.on{animation:none;-webkit-mask-image:none;mask-image:none}}
+@media(max-width:560px){.kmap{border-radius:14px}.kch{min-width:44px;height:44px;font-size:16px}}
+</style>
+</head>
+<body>
+
+<header class="hdr" data-header>
+  <div class="wrap">
+    <a class="logo" href="#top">ДА-медиа</a>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a href="#format">Формат</a>
+      <a href="#seti">Цифры</a>
+      <a href="#karta">Карта</a>
+      <a href="#rayony">Районы</a>
+      <a href="#zapusk">Запуск</a>
+    </nav>
+    <a class="btn btn-p btn-sm" href="#zayavka">Оставить заявку</a>
+    <button class="burger" type="button" data-menu-open aria-controls="menu"
+            aria-expanded="false" aria-label="Открыть меню разделов"><i aria-hidden="true"></i></button>
+  </div>
+</header>
+
+<!-- меню узких экранов: все разделы, включая те, что не помещаются в строку -->
+<div class="mnu" id="menu" hidden data-menu>
+  <div class="wrap">
+    <div class="scr">
+      <div class="scr-bar"><span class="dot"></span>Разделы<button class="mnu-x" type="button"
+           data-menu-close aria-label="Закрыть меню разделов">Закрыть</button></div>
+      <nav class="scr-in mnu-in" aria-label="Все разделы страницы">
+        <ul>
+          <li><a href="#format">Что видит пассажир</a></li>
+          <li><a href="#seti">Цифры сети</a></li>
+          <li><a href="#karta">Карта маршрутов</a></li>
+          <li><a href="#rayony">Районы и маршруты</a></li>
+          <li><a href="#zapusk">Как запустить</a></li>
+        </ul>
+        <a class="btn btn-p mnu-go" href="#zayavka">Оставить заявку</a>
+      </nav>
+    </div>
+  </div>
+</div>
+<div class="mnu-back" hidden data-menu-back></div>
+
+<main id="top">
+
+<!-- первый экран -->
+<section class="hero wrap">
+  <div class="hero-grid">
+
+    <div class="hero-txt" data-rv>
+      <p class="lbl">Медиакит &middot; Калининград</p>
+      <h1>Ваша реклама на экранах в <span class="nw">салонах автобусов</span></h1>
+      <p class="lead">У самых крупных перевозчиков Калининградской области. Пассажир едет
+        пятнадцать&ndash;двадцать минут и смотрит туда, где светится, &mdash; ролик выходит
+        каждую минуту.</p>
+      <p class="mk"><b>Изготовление ролика или баннера &mdash; 3&nbsp;000&nbsp;₽.</b> При размещении от трёх месяцев &mdash; бесплатно.</p>
+      <div class="hero-cta">
+        <a class="btn btn-p" href="#zayavka">Оставить заявку</a>
+        <a class="btn btn-g btn-tel" href="tel:+74012377742" data-phone="Показать телефон">Показать телефон</a>
+      </div>
+      <ul class="facts">
+        <li><b>Крупнейшие перевозчики</b><span>Калининград и область</span></li>
+        <li><b>Каждую минуту</b><span>ролик выходит на экране</span></li>
+        <li><b>10 секунд</b><span>ролик, без звука</span></li>
+      </ul>
+    </div>
+
+    <div data-rv>
+      <div class="bus-card">
+  <svg viewBox="950 480 380 270" preserveAspectRatio="xMidYMid slice" role="img"
+       aria-label="Ночная улица Калининграда: маршрутка едет, внутри светится рекламный экран">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#02060f"/><stop offset=".46" stop-color="#050d1e"/>
+        <stop offset=".82" stop-color="#0a1a33"/><stop offset="1" stop-color="#0d2445"/>
+      </linearGradient>
+      <!-- холодная подсветка у горизонта — синий свет моста с фотографии -->
+      <radialGradient id="cold" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#2f6fe0" stop-opacity=".2"/>
+        <stop offset=".55" stop-color="#1d4fbf" stop-opacity=".07"/>
+        <stop offset="1" stop-color="#1d4fbf" stop-opacity="0"/>
+      </radialGradient>
+      <!-- дымка у горизонта: дальний план тонет в ней, как на ночном снимке -->
+      <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#081428" stop-opacity="0"/>
+        <stop offset="1" stop-color="#081428" stop-opacity=".92"/>
+      </linearGradient>
+      <!-- дальний план не в фокусе -->
+      <filter id="dof" x="-4%" y="-10%" width="108%" height="126%" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="2.6"/>
+      </filter>
+      <radialGradient id="haze" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#ffa457" stop-opacity=".16"/><stop offset="1" stop-color="#ff6a13" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="asph" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0a1526"/><stop offset="1" stop-color="#02060e"/>
+      </linearGradient>
+      <!-- кузов ночью: холодный свет неба сверху, тёплый отсвет от фар снизу -->
+      <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#46628f"/><stop offset=".07" stop-color="#28405f"/>
+        <stop offset=".34" stop-color="#16273f"/><stop offset=".72" stop-color="#0c182a"/>
+        <stop offset=".92" stop-color="#131a29"/><stop offset="1" stop-color="#281c24"/>
+      </linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#05162c"/><stop offset="1" stop-color="#020b1a"/>
+      </linearGradient>
+      <!-- отсвет экрана на соседних стёклах -->
+      <linearGradient id="spillL" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ff8a3c" stop-opacity="0"/><stop offset="1" stop-color="#ff8a3c" stop-opacity=".34"/>
+      </linearGradient>
+      <linearGradient id="spillR" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ff8a3c" stop-opacity=".3"/><stop offset="1" stop-color="#ff8a3c" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="lamp" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#fff1cc" stop-opacity=".92"/><stop offset="1" stop-color="#ffd47a" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="warm" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#ff7a2a" stop-opacity=".38"/><stop offset="1" stop-color="#ff6a13" stop-opacity="0"/>
+      </radialGradient>
+      <!-- экран: плотное ядро и широкое гало -->
+      <radialGradient id="glowNear" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#ffc48c" stop-opacity=".8"/>
+        <stop offset=".45" stop-color="#ff8a3c" stop-opacity=".42"/>
+        <stop offset="1" stop-color="#ff6a13" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="glowFar" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#ff7a2a" stop-opacity=".3"/>
+        <stop offset=".5" stop-color="#ff6a13" stop-opacity=".11"/>
+        <stop offset="1" stop-color="#ff6a13" stop-opacity="0"/>
+      </radialGradient>
+
+      <!-- ПЛАН 2 · дальний силуэт города: семь крупных объёмов, без окон -->
+      <g id="farT" fill="#061022" filter="url(#dof)">
+        <path d="M0 612V462h182v150z"/>
+        <path d="M244 612V386h92v226z"/><path d="M244 386l46-46 46 46z"/><rect x="287" y="300" width="6" height="44"/>
+        <path d="M392 612V504h298v108z"/>
+        <path d="M744 612V470h172v142z"/><circle cx="830" cy="462" r="44"/>
+        <path d="M968 612V420h142v192z"/>
+        <path d="M1162 612V498h214v114z"/>
+        <path d="M1428 612V440h124v172z"/>
+      </g>
+
+      <!-- ПЛАН 3 · ближний квартал: шесть объёмов, одиннадцать крупных окон -->
+      <g id="midT">
+        <g fill="#0a1a31">
+          <rect x="40" y="470" width="212" height="142"/>
+          <rect x="302" y="418" width="170" height="194"/>
+          <rect x="560" y="492" width="250" height="120"/>
+          <rect x="880" y="442" width="190" height="170"/>
+          <rect x="1140" y="478" width="232" height="134"/>
+          <rect x="1440" y="430" width="142" height="182"/>
+        </g>
+        <g fill="#ffbe86" opacity=".28">
+          <rect x="78" y="502" width="28" height="34"/><rect x="330" y="452" width="28" height="34"/>
+          <rect x="600" y="524" width="28" height="34"/><rect x="912" y="476" width="28" height="34"/>
+          <rect x="1180" y="512" width="28" height="34"/>
+        </g>
+        <g fill="#ffb473" opacity=".15">
+          <rect x="148" y="502" width="28" height="34"/><rect x="330" y="516" width="28" height="34"/>
+          <rect x="690" y="524" width="28" height="34"/><rect x="982" y="476" width="28" height="34"/>
+          <rect x="1266" y="512" width="28" height="34"/><rect x="1470" y="466" width="28" height="34"/>
+        </g>
+      </g>
+
+      <!-- ПЛАН 4 · разметка дороги -->
+      <g id="dashT" fill="#cddcf7" opacity=".13">
+        <rect x="0" y="716" width="130" height="9" rx="4"/><rect x="200" y="716" width="130" height="9" rx="4"/>
+        <rect x="400" y="716" width="130" height="9" rx="4"/><rect x="600" y="716" width="130" height="9" rx="4"/>
+        <rect x="800" y="716" width="130" height="9" rx="4"/><rect x="1000" y="716" width="130" height="9" rx="4"/>
+        <rect x="1200" y="716" width="130" height="9" rx="4"/><rect x="1400" y="716" width="130" height="9" rx="4"/>
+      </g>
+    </defs>
+
+    <!-- ПЛАН 1 · небо и городская засветка -->
+    <rect width="1600" height="760" fill="url(#sky)"/>
+    <ellipse cx="1120" cy="512" rx="300" ry="196" fill="url(#haze)" class="glow-far"/>
+    <ellipse cx="392" cy="596" rx="420" ry="176" fill="url(#cold)"/>
+
+    <g class="lay far"><use href="#farT" x="0"/><use href="#farT" x="1600"/></g>
+    <rect x="0" y="452" width="1600" height="164" fill="url(#mist)"/>
+    <g class="lay mid"><use href="#midT" x="0"/><use href="#midT" x="1600"/></g>
+
+    <rect x="0" y="612" width="1600" height="16" fill="#081227"/>
+    <rect x="0" y="628" width="1600" height="132" fill="url(#asph)"/>
+    <g class="lay road"><use href="#dashT" x="0"/><use href="#dashT" x="1600"/></g>
+
+    <!-- ═══ МАРШРУТКА ═══════════════════════════════════════════════════
+         Уменьшена примерно вдвое и уведена вправо: под текстом остаётся
+         чистая ночь. Кузов тёмный, свет неба сверху, отсвет фар снизу.
+         Единственное яркое пятно кадра — экран в салоне.              ═══ -->
+    <g class="ride">
+      <ellipse cx="800" cy="678" rx="296" ry="19" fill="#02091a" opacity=".68"/>
+      <!-- свет ложится на мокрый асфальт: тёплая дорожка от фар и отсвет экрана -->
+      <ellipse cx="1092" cy="712" rx="52" ry="104" fill="url(#lamp)" opacity=".16"/>
+      <ellipse cx="770" cy="706" rx="76" ry="92" fill="url(#warm)" opacity=".5"/>
+
+      <g class="bus">
+        <!-- дальний свет -->
+        <path d="M1082 578l352-78v156z" fill="url(#lamp)" opacity=".17"/>
+
+        <!-- кузов -->
+        <path d="M543 400h420c34 0 62 10 84 30l52 48c14 13 21 28 21 44v76c0 12-9 21-21 21H543c-16 0-28-12-28-28V428c0-16 12-28 28-28z" fill="url(#body)"/>
+        <!-- тёплый отсвет от фар по низу переда -->
+        <ellipse cx="1010" cy="596" rx="150" ry="46" fill="url(#warm)"/>
+        <!-- холодный кант по крыше -->
+        <path d="M545 401h418c31 0 57 9 79 27" fill="none" stroke="#b9cdf0" stroke-width="2.5" opacity=".26" stroke-linecap="round"/>
+        <!-- фирменная полоса: приглушена, чтобы не спорить с экраном -->
+        <path d="M515 568h585v22H515z" fill="#ff6a13" opacity=".52"/>
+
+        <!-- стёкла -->
+        <rect x="548" y="426" width="140" height="104" rx="10" fill="url(#glass)"/>
+        <rect x="700" y="426" width="152" height="104" rx="10" fill="url(#glass)"/>
+        <rect x="864" y="426" width="116" height="104" rx="10" fill="url(#glass)"/>
+        <path d="M996 426h34c9 0 17 3 23 9l44 41c7 6 11 15 11 24v30h-112z" fill="url(#glass)"/>
+        <!-- свет экрана ложится на соседние стёкла -->
+        <rect x="548" y="426" width="140" height="104" rx="10" fill="url(#spillL)"/>
+        <rect x="864" y="426" width="116" height="104" rx="10" fill="url(#spillR)"/>
+        <path d="M858 426v164" stroke="#6d86a8" stroke-width="3" fill="none" opacity=".7"/>
+
+        <!-- пассажир: тёмный силуэт с тёплым кантом со стороны экрана -->
+        <g fill="#04122b">
+          <circle cx="598" cy="472" r="17"/><path d="M578 530v-28a20 20 0 0 1 40 0v28z"/>
+        </g>
+        <g fill="#ff9a4e" opacity=".5">
+          <path d="M598 455a17 17 0 0 1 0 34z"/><path d="M598 483a19 19 0 0 1 19 19v28h-19z"/>
+        </g>
+
+        <!-- ═ ГЕРОЙ СЦЕНЫ: экран в салоне ═ -->
+        <circle cx="766" cy="471" r="190" fill="url(#glowFar)"/>
+        <circle cx="766" cy="471" r="96" fill="url(#glowNear)"/>
+        <circle cx="766" cy="471" r="86" fill="none" stroke="#ffa05c" stroke-width="2.5" opacity=".45" class="ping"/>
+        <rect x="704" y="432" width="124" height="78" rx="7" fill="#0a2647" stroke="#ff6a13" stroke-width="3"/>
+        <g class="ad1">
+          <rect x="708" y="436" width="116" height="70" fill="#ff7a22"/>
+          <rect x="724" y="458" width="84" height="10" rx="2" fill="#fff"/>
+          <rect x="724" y="478" width="54" height="10" rx="2" fill="#fff" opacity=".7"/>
+        </g>
+        <g class="ad2">
+          <rect x="708" y="436" width="116" height="70" fill="#0f3d8f"/>
+          <rect x="724" y="458" width="84" height="10" rx="2" fill="#ffc08a"/>
+          <rect x="724" y="478" width="60" height="10" rx="2" fill="#fff" opacity=".65"/>
+        </g>
+        <g class="ad3">
+          <rect x="708" y="436" width="116" height="70" fill="#f6f9ff"/>
+          <rect x="724" y="458" width="72" height="10" rx="2" fill="#ff6a13"/>
+          <rect x="724" y="478" width="50" height="10" rx="2" fill="#12305f" opacity=".85"/>
+        </g>
+
+        <!-- номер маршрута -->
+        <rect x="1008" y="440" width="60" height="30" rx="5" fill="#061b38"/>
+        <text x="1038" y="463" text-anchor="middle" font-family="JB,monospace" font-size="21" fill="#ffa05c">8</text>
+
+        <!-- фары и габарит -->
+        <ellipse cx="1096" cy="556" rx="22" ry="13" fill="#fff4cf"/>
+        <circle cx="1122" cy="556" r="46" fill="url(#lamp)" opacity=".55"/>
+        <rect x="522" y="546" width="16" height="12" rx="3" fill="#ff6a13"/>
+
+        <!-- колёса: покрышка, диск с отверстиями, ступица -->
+        <g class="whl">
+          <circle cx="636" cy="628" r="48" fill="#060e1c"/>
+          <circle cx="636" cy="628" r="31" fill="#1b2c49"/>
+          <g fill="#060e1c">
+            <circle cx="654" cy="628" r="7"/><circle cx="641.6" cy="645.1" r="7"/>
+            <circle cx="621.4" cy="638.6" r="7"/><circle cx="621.4" cy="617.4" r="7"/>
+            <circle cx="641.6" cy="610.9" r="7"/>
+          </g>
+          <circle cx="636" cy="628" r="7" fill="#42618f"/>
+        </g>
+        <g class="whl">
+          <circle cx="976" cy="628" r="48" fill="#060e1c"/>
+          <circle cx="976" cy="628" r="31" fill="#1b2c49"/>
+          <g fill="#060e1c">
+            <circle cx="994" cy="628" r="7"/><circle cx="981.6" cy="645.1" r="7"/>
+            <circle cx="961.4" cy="638.6" r="7"/><circle cx="961.4" cy="617.4" r="7"/>
+            <circle cx="981.6" cy="610.9" r="7"/>
+          </g>
+          <circle cx="976" cy="628" r="7" fill="#42618f"/>
+        </g>
+      </g>
+    </g>
+  </svg>
+      <div class="scr scr-on-bus">
+        <div class="scr-in">
+          <div class="spot" data-spot>
+            <article class="slide sl1 on">
+              <div class="txt"><p class="k">Шиномонтаж</p>
+              <p class="big">Переобуться за двадцать минут</p>
+              <p class="tel">+7 (4012) 37-77-42</p></div>
+              <svg class="art" viewBox="0 0 120 120" aria-hidden="true">
+ <circle cx="60" cy="60" r="58" fill="#fff" opacity=".22"/>
+ <g class="tire"><circle cx="60" cy="60" r="46" fill="#15181f"/><g fill="#2a2f3b"><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(0 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(15 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(30 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(45 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(60 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(75 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(90 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(105 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(120 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(135 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(150 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(165 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(180 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(195 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(210 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(225 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(240 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(255 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(270 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(285 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(300 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(315 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(330 60 60)"/><rect x="57" y="12" width="6" height="9" rx="2" transform="rotate(345 60 60)"/></g>
+  <circle cx="60" cy="60" r="35" fill="#242936"/><circle cx="60" cy="60" r="29" fill="#dfe6f2"/>
+  <g stroke="#9aa7c0" stroke-width="3" stroke-linecap="round"><path d="M60 60L60.0 33.0" /><path d="M60 60L75.9 38.2" /><path d="M60 60L85.7 51.7" /><path d="M60 60L85.7 68.3" /><path d="M60 60L75.9 81.8" /><path d="M60 60L60.0 87.0" /><path d="M60 60L44.1 81.8" /><path d="M60 60L34.3 68.3" /><path d="M60 60L34.3 51.7" /><path d="M60 60L44.1 38.2" /></g>
+  <circle cx="60" cy="60" r="19" fill="#c3ccde"/><g fill="#5b6784"><circle cx="60.0" cy="46.0" r="2.6"/><circle cx="73.3" cy="55.7" r="2.6"/><circle cx="68.2" cy="71.3" r="2.6"/><circle cx="51.8" cy="71.3" r="2.6"/><circle cx="46.7" cy="55.7" r="2.6"/></g><circle cx="60" cy="60" r="5" fill="#15181f"/></g>
+ <g transform="translate(88 14)"><circle cx="14" cy="14" r="14" fill="#fff" stroke="#0a1a33" stroke-width="3"/>
+  <path d="M14 6v8" stroke="#0a1a33" stroke-width="3" stroke-linecap="round"/>
+  <path class="hand" d="M14 14h7" stroke="#ff6a13" stroke-width="3" stroke-linecap="round"/></g>
+</svg>
+            </article>
+            <article class="slide sl2">
+              <div class="txt"><p class="k">Доставка обедов</p>
+              <p class="big">Горячий обед к вашей двери</p>
+              <p class="tel">+7 (4012) 37-77-42</p></div>
+              <svg class="art" viewBox="0 0 120 120" aria-hidden="true">
+ <circle cx="60" cy="62" r="58" fill="#fff" opacity=".2"/>
+ <g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".95"><path class="stm" d="M42 50c-7-7 7-11 0-20"/><path class="stm" d="M60 50c-7-7 7-11 0-20"/><path class="stm" d="M78 50c-7-7 7-11 0-20"/></g>
+ <g class="bowl">
+  <path d="M16 60h88c-1 28-19 44-44 44S17 88 16 60z" fill="#fff"/>
+  <path d="M22 76h76" stroke="#ffb27d" stroke-width="3" stroke-linecap="round"/><path d="M30 88h60" stroke="#ffb27d" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="60" cy="60" rx="44" ry="8" fill="#d63a14"/>
+  <circle cx="44" cy="59" r="3.5" fill="#ffd23f"/><circle cx="62" cy="61" r="3.5" fill="#7ac74f"/><circle cx="78" cy="59" r="3.5" fill="#ffd23f"/>
+  <path d="M78 58l24-30" stroke="#0a1a33" stroke-width="3.5" stroke-linecap="round"/><path d="M84 60l26-26" stroke="#0a1a33" stroke-width="3.5" stroke-linecap="round"/></g>
+ <ellipse cx="60" cy="110" rx="38" ry="4" fill="#0a1a33" opacity=".15"/>
+</svg>
+            </article>
+            <article class="slide sl3">
+              <div class="txt"><p class="k">Стоматология</p>
+              <p class="big">Лечим спокойно и без очереди</p>
+              <p class="tel">+7 (4012) 37-77-42</p></div>
+              <svg class="art" viewBox="0 0 120 120" aria-hidden="true">
+ <circle cx="60" cy="62" r="58" fill="#fff" opacity=".55"/>
+ <g class="tooth"><path d="M32 40c0-15 14-20 28-13 14-7 28-2 28 13 0 14-5 20-7 36-2 14-5 26-11 26-7 0-5-19-10-19s-3 19-10 19c-6 0-9-12-11-26-2-16-7-22-7-36z" fill="#fff" stroke="#1d6fb8" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M42 38c2-5 7-7 12-6" fill="none" stroke="#bfe3ff" stroke-width="4" stroke-linecap="round"/></g>
+ <g><circle cx="92" cy="92" r="17" fill="#1d9b5a"/><path d="M83 92l7 7 12-14" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <g fill="#fff" stroke="#1d6fb8" stroke-width="2"><path class="spark" d="M98 16l3.5 8.5 8.5 3.5-8.5 3.5-3.5 8.5-3.5-8.5-8.5-3.5 8.5-3.5z"/>
+  <path class="spark b" d="M16 34l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z"/></g>
+</svg>
+            </article>
+            <article class="slide sl4">
+              <div class="txt"><p class="k">ДА-медиа</p>
+              <p class="big">Здесь может быть ваша реклама</p>
+              <p class="tel">+7 (4012) 37-77-42</p></div>
+              <svg class="art" viewBox="0 0 120 120" aria-hidden="true">
+ <circle cx="60" cy="60" r="58" fill="#fff" opacity=".08"/>
+ <rect x="8" y="26" width="104" height="66" rx="10" fill="#ff6a13"/><rect x="15" y="33" width="90" height="52" rx="5" fill="#06142e"/>
+ <path class="play" d="M52 46l26 13-26 13z" fill="#fff"/>
+ <rect x="46" y="92" width="28" height="7" rx="3" fill="#8ba1c9"/><rect x="34" y="99" width="52" height="6" rx="3" fill="#8ba1c9"/>
+</svg>
+            </article>
+          </div>
+        </div>
+        <div class="prog" data-prog><i></i></div>
+        <div class="ctl">
+          <div class="dots" data-dots>
+            <button type="button" aria-label="Показать первый пример" aria-current="true"><span></span></button>
+            <button type="button" aria-label="Показать второй пример"><span></span></button>
+            <button type="button" aria-label="Показать третий пример"><span></span></button>
+            <button type="button" aria-label="Показать четвёртый пример"><span></span></button>
+          </div>
+          <button class="pauza" type="button" data-pause hidden>Пауза</button>
+        </div>
+      </div>
+      </div>
+      <h2 class="sr">Пример ролика на экране</h2>
+      <p class="scr-cap">Так выглядит место, которое вы покупаете: крупная строка, короткая
+        подстрока и телефон. Примеры придуманы для показа &mdash; на линии здесь будет ваш ролик.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- что видит пассажир -->
+<section class="sec sec--blue" id="format">
+  <div class="wrap">
+    <header class="sec-h" data-rv>
+      <p class="lbl">Что видит пассажир</p>
+      <h2>На экран в салоне смотрят всю дорогу</h2>
+      <p class="lead">Реклама в автобусе не борется за внимание: человек уже сел, уже едет
+        и уже смотрит вперёд. Звука нет &mdash; работает крупная строка, короткая подстрока и телефон.</p>
+    </header>
+
+    <div class="pass">
+      <figure class="foto" data-rv>
+        <img src="assets/foto/кг/02-salon.jpg" width="1100" height="1375" loading="lazy"
+             alt="Пассажиры в салоне городского автобуса">
+        <figcaption>Вечерний рейс: салон полон, поездка идёт пятнадцать&ndash;двадцать минут.
+          Человек уже сел и едет, а экран стоит в поле зрения.</figcaption>
+      </figure>
+
+      <div data-rv>
+        <ul class="pass-list">
+          <li>
+            <h3>Экран работает столько же, сколько автобус</h3>
+            <p>Семнадцать часов на линии, с первого утреннего рейса до последнего вечернего.
+               Отдельно включать и выключать ничего не нужно.</p>
+          </li>
+          <li>
+            <h3>Ролик десять секунд, без звука</h3>
+            <p>Формат простой: одна мысль, одно действие, телефон крупно. Макет соберём мы
+               или возьмём ваш готовый.</p>
+          </li>
+          <li>
+            <h3>Аудитория &mdash; весь город, а не прохожие</h3>
+            <p>Школьники, студенты, люди на работу и с работы, пенсионеры. За день сеть
+               набирает около сорока тысяч контактов.</p>
+          </li>
+        </ul>
+
+        <div class="krug">
+          <div class="krug-h">
+            <b>Круг 1 минута</b>
+            <span>шесть слотов по десять секунд, один из них ваш</span>
+          </div>
+          <div class="slots" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+          <p>Круг повторяется: шестьдесят выходов в час, за семнадцать часов на линии &mdash;
+             1020 показов на каждом экране за сутки.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- цифры сети -->
+<section class="sec sec--blue" id="seti">
+  <div class="wrap">
+    <header class="sec-h" data-rv>
+      <p class="lbl">Цифры сети</p>
+      <h2>Пять чисел сети</h2>
+      <p class="lead">Пример: 100 экранов на 10 маршрутах. Когда подключаются новые перевозчики, сеть и цифры растут. Охват расчётный, по среднему числу пассажиров на экран.</p>
+    </header>
+
+    <ul class="nums" data-rv>
+      <li>
+        <p class="n">100 <em>экранов</em></p>
+        <p>Столько автобусов выходит на линию с экраном в салоне.</p>
+      </li>
+      <li>
+        <p class="n">10 <em>маршрутов</em></p>
+        <p>Городские и пригородные: центр, спальные районы, Чкаловск, Борисово и область.</p>
+      </li>
+      <li>
+        <p class="n">17 <em>часов</em></p>
+        <p>Экран светится столько же, сколько автобус на линии, &mdash; с утра до позднего вечера.</p>
+      </li>
+      <li>
+        <p class="n">1020 <em>показов</em></p>
+        <p>Ролик на десять секунд в круге на одну минуту: шестьдесят выходов в час на каждом экране.</p>
+      </li>
+      <li>
+        <p class="n">40&nbsp;000 <em>контактов</em></p>
+        <p>Примерно столько пассажиров видит сеть за день: около четырёхсот человек на экран.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- карта маршрутов -->
+<section class="sec sec--blue" id="karta">
+  <div class="wrap">
+    <header class="sec-h" data-rv>
+      <p class="lbl">Карта</p>
+      <h2>Маршруты на карте города</h2>
+      <p class="lead">Первый перевозчик в сети. Нажмите на номер маршрута &mdash; он подсветится на карте.
+        Реклама идёт только на тех маршрутах, которые вы выберете.</p>
+    </header>
+    <div class="kwrap" data-rv data-karta>
+      <div class="kscroll"><div class="kmap">
+        <img class="kbase" src="assets/karta/karta-marshrutov.jpg" width="1600" height="1117" loading="lazy"
+             alt="Схема автобусных маршрутов Калининграда: маршруты 4, 8, 10, 21, 25, 26, 29 и 48. Реклама в автобусах: +7 (4012) 37-77-42">
+        <img class="rl" data-r="4" style="--c:#fa0a23" src="assets/karta/r4.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="8" style="--c:#00914b" src="assets/karta/r8.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="10" style="--c:#0050af" src="assets/karta/r10.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="21" style="--c:#e223aa" src="assets/karta/r21.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="25" style="--c:#f0b400" src="assets/karta/r25.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="26" style="--c:#96c81e" src="assets/karta/r26.png" alt="" width="1600" height="1117" loading="lazy"><img class="rl" data-r="29" style="--c:#0096e1" src="assets/karta/r29.png" alt="" width="1600" height="1117" loading="lazy">
+      </div>
+      </div>
+      <p class="khint">Карту можно двигать пальцем</p>
+      <div class="kctl">
+        <div class="kchips" role="group" aria-label="Выбор маршрута"><button type="button" class="kch" data-r="4" style="--c:#fa0a23" aria-pressed="false"><i>4</i></button><button type="button" class="kch" data-r="8" style="--c:#00914b" aria-pressed="false"><i>8</i></button><button type="button" class="kch" data-r="10" style="--c:#0050af" aria-pressed="false"><i>10</i></button><button type="button" class="kch" data-r="21" style="--c:#e223aa" aria-pressed="false"><i>21</i></button><button type="button" class="kch" data-r="25" style="--c:#f0b400" aria-pressed="false"><i>25</i></button><button type="button" class="kch" data-r="26" style="--c:#96c81e" aria-pressed="false"><i>26</i></button><button type="button" class="kch" data-r="29" style="--c:#0096e1" aria-pressed="false"><i>29</i></button><button type="button" class="kall" data-all>Все маршруты</button></div>
+        <p class="kinfo" data-info>Маршруты 4, 8, 10, 21, 25, 26, 29, 48</p>
+        <a class="kbig" href="assets/karta/karta-marshrutov.jpg" target="_blank" rel="noopener">Открыть карту крупно</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- районы и маршруты -->
+<section class="sec" id="rayony">
+  <div class="wrap">
+    <header class="sec-h" data-rv>
+      <p class="lbl">Районы и маршруты</p>
+      <h2>Где стоят экраны и сколько их в каждом районе</h2>
+      <p class="lead">Пример по сети. Можно взять всю сеть, а можно один район рядом с вашей точкой.
+        Контакты в таблице &mdash; это экраны района, умноженные на четыреста человек в день.</p>
+    </header>
+
+    <figure class="band" data-rv>
+      <img src="assets/foto/кг/01-ulica-noch.jpg" width="1900" height="814" loading="lazy"
+           alt="Ночной Калининград: Медовый мост и набережная Рыбной деревни">
+      <figcaption>Вечерний город: маршруты идут через центр, набережные и спальные районы &mdash;
+        и вместе с ними едут экраны.</figcaption>
+    </figure>
+
+    <table class="tbl" data-rv>
+      <caption class="sr">Экраны, контакты и доля сети по районам</caption>
+      <thead>
+        <tr>
+          <th scope="col">Район</th>
+          <th scope="col">Экранов</th>
+          <th scope="col">Контактов в день</th>
+          <th scope="col">Доля сети</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="nm"><b>Ленинградский</b><span>Сельма, Северная гора</span></td>
+          <td class="v" data-l="Экранов">22</td>
+          <td class="v" data-l="Контактов в день">8&nbsp;800</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>22&nbsp;%</b><span class="bar"><i style="width:22%"></i></span></span></td>
+        </tr>
+        <tr>
+          <td class="nm"><b>Центр</b><span>Площадь Победы, вокзал</span></td>
+          <td class="v" data-l="Экранов">26</td>
+          <td class="v" data-l="Контактов в день">10&nbsp;400</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>26&nbsp;%</b><span class="bar"><i style="width:26%"></i></span></span></td>
+        </tr>
+        <tr>
+          <td class="nm"><b>Московский</b><span>Восток, Балтрайон</span></td>
+          <td class="v" data-l="Экранов">20</td>
+          <td class="v" data-l="Контактов в день">8&nbsp;000</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>20&nbsp;%</b><span class="bar"><i style="width:20%"></i></span></span></td>
+        </tr>
+        <tr>
+          <td class="nm"><b>Чкаловск</b><span>Западная окраина</span></td>
+          <td class="v" data-l="Экранов">12</td>
+          <td class="v" data-l="Контактов в день">4&nbsp;800</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>12&nbsp;%</b><span class="bar"><i style="width:12%"></i></span></span></td>
+        </tr>
+        <tr>
+          <td class="nm"><b>Прибрежный</b><span>Юго-запад города</span></td>
+          <td class="v" data-l="Экранов">10</td>
+          <td class="v" data-l="Контактов в день">4&nbsp;000</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>10&nbsp;%</b><span class="bar"><i style="width:10%"></i></span></span></td>
+        </tr>
+        <tr>
+          <td class="nm"><b>Борисово и область</b><span>Пригородные рейсы</span></td>
+          <td class="v" data-l="Экранов">10</td>
+          <td class="v" data-l="Контактов в день">4&nbsp;000</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>10&nbsp;%</b><span class="bar"><i style="width:10%"></i></span></span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="nm"><b>Вся сеть</b><span>шесть районов, десять маршрутов</span></td>
+          <td class="v" data-l="Экранов">100</td>
+          <td class="v" data-l="Контактов в день">40&nbsp;000</td>
+          <td class="sh" data-l="Доля сети"><span class="shr"><b>100&nbsp;%</b><span class="bar"><i style="width:100%"></i></span></span></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+<!-- как запустить -->
+<section class="sec sec--blue" id="zapusk">
+  <div class="wrap">
+    <header class="sec-h" data-rv>
+      <p class="lbl">Как запустить</p>
+      <h2>Четыре шага от заявки до эфира</h2>
+      <p class="lead">Вы говорите, что рекламируете, мы собираем ролик
+        и ставим его в эфир.</p>
+    </header>
+
+    <ol class="steps" data-rv>
+      <li>
+        <p class="st">Шаг 1 &mdash; заявка</p>
+        <h3>Вы пишете, что рекламируете</h3>
+        <p>Район, срок и пара слов о деле.</p>
+      </li>
+      <li>
+        <p class="st">Шаг 2 &mdash; макет</p>
+        <h3>Собираем ролик на десять секунд</h3>
+        <p>Крупная строка, короткая подстрока, телефон. Соберём из вашего материала
+           или возьмём готовый ролик, если он есть. Изготовление ролика или баннера &mdash; 3&nbsp;000&nbsp;₽, от трёх месяцев размещения &mdash; бесплатно.</p>
+      </li>
+      <li>
+        <p class="st">Шаг 3 &mdash; запуск</p>
+        <h3>Ставим ролик в круг на одну минуту</h3>
+        <p>С этого дня он выходит на выбранных маршрутах каждую минуту, все
+           семнадцать часов на линии.</p>
+      </li>
+      <li>
+        <p class="st">Шаг 4 &mdash; отчёт</p>
+        <h3>Показываем, что было в эфире</h3>
+        <p>После кампании присылаем сводку: экраны, дни и показы.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- заявка -->
+<section class="sec" id="zayavka">
+  <div class="wrap">
+    <header class="sec-h" data-rv>
+      <p class="lbl">Заявка</p>
+      <h2>Напишите пару строк &mdash; мы свяжемся</h2>
+      <p class="lead">Форма открывает почтовую программу с уже собранным письмом.
+        Если так неудобно &mdash; звоните или пишите в мессенджер, контакты рядом.</p>
+    </header>
+
+    <div class="order">
+      <div data-rv>
+        <div class="scr">
+          <div class="scr-bar"><span class="dot"></span>Заявка<span class="r">письмо соберётся само</span></div>
+          <form class="scr-in form" data-mail>
+            <div class="f-row">
+              <label for="f-name">Как к вам обращаться</label>
+              <input id="f-name" type="text" name="Имя" placeholder="Имя" required>
+            </div>
+            <div class="f-row">
+              <label for="f-tel">Телефон или мессенджер</label>
+              <input id="f-tel" type="text" inputmode="text" autocomplete="tel" name="Связь" placeholder="Куда ответить" required>
+            </div>
+            <div class="f-row">
+              <label for="f-biz">Что рекламируем</label>
+              <input id="f-biz" type="text" name="Что рекламируем" placeholder="Кофейня, автосервис, клиника…">
+            </div>
+            <div class="f-row">
+              <label for="f-txt">Что важно сказать</label>
+              <textarea id="f-txt" name="Комментарий" placeholder="Район, сроки, пожелания к ролику"></textarea>
+            </div>
+            <button class="btn btn-p" type="submit">Отправить заявку</button>
+            <p class="ok" data-mail-ok hidden></p>
+            <p class="fine">Отправляя форму, вы соглашаетесь, что мы свяжемся с вами по
+              указанным контактам.</p>
+          </form>
+        </div>
+      </div>
+
+      <div data-rv>
+        <h3>Прямые контакты</h3>
+        <ul class="cts">
+          <li><span class="k">Телефон</span><a href="tel:+74012377742" data-phone="Показать телефон">Показать телефон</a></li>
+          <li><span class="k">Почта</span><a href="mailto:info@damedia39.ru" data-link="mail" data-mailtext>info@damedia39.ru</a></li>
+          <li><span class="k">Telegram</span><a href="https://t.me/damedia39" data-link="tg">Написать в Telegram</a></li>
+          <li><span class="k">WhatsApp</span><a href="https://wa.me/79000000000" data-link="wa">Написать в WhatsApp</a></li>
+          <li><span class="k">MAX</span><a href="https://max.ru/damedia39" data-link="max">Написать в MAX</a></li>
+        </ul>
+        <p class="note" style="margin-top:18px">Отвечаем в рабочее время. Предложение по выбранным
+          районам готовим в тот же день.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <span class="logo">ДА-медиа</span>
+        <p class="about">Экраны в салонах автобусов Калининграда. У самых крупных перевозчиков
+          Калининградской области.</p>
+      </div>
+      <div class="ft-nav">
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#format">Что видит пассажир</a></li>
+          <li><a href="#seti">Цифры сети</a></li>
+          <li><a href="#karta">Карта маршрутов</a></li>
+          <li><a href="#rayony">Районы и маршруты</a></li>
+          <li><a href="#zapusk">Как запустить</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <ul>
+          <li><a href="tel:+74012377742" data-phone="Показать телефон">Показать телефон</a></li>
+          <li><a href="mailto:info@damedia39.ru" data-link="mail" data-mailtext>info@damedia39.ru</a></li>
+          <li><a href="https://t.me/damedia39" data-link="tg">Telegram</a></li>
+          <li><a href="https://wa.me/79000000000" data-link="wa">WhatsApp</a></li>
+          <li><a href="https://max.ru/damedia39" data-link="max">MAX</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <p>ДА-медиа &mdash; реклама на экранах в автобусах. Цифры на странице &mdash; параметры
+        сети на сегодня; примеры роликов придуманы для показа.</p>
+      <p><a href="#top">Наверх</a></p>
+    </div>
+  </div>
+  <div class="foto-credit wrap" style="padding-bottom:22px">Фото: Александр Сигачёв, Artem Svetlov, Artyom Svetlov — Wikimedia Commons, лицензии CC0 и CC BY</div>
+</footer>
+
+<script src="assets/da.js"></script>
+<script>
+/* Меню узких экранов: бургер, список всех разделов, запрет прокрутки фона,
+   закрытие по выбору пункта, по крестику, по Escape и по щелчку мимо. */
+(function(){
+  'use strict';
+  var кнопка = document.querySelector('[data-menu-open]');
+  var меню   = document.querySelector('[data-menu]');
+  var шторка = document.querySelector('[data-menu-back]');
+  if (!кнопка || !меню || !шторка) return;
+  var широкий = matchMedia('(min-width:920px)');
+  var открыто = false;
+
+  function доступные(){
+    return Array.prototype.filter.call(
+      меню.querySelectorAll('a[href],button:not([disabled])'),
+      function(э){ return э.getClientRects().length > 0 }
+    );
+  }
+  function открыть(){
+    if (открыто || широкий.matches) return;
+    открыто = true;
+    шторка.hidden = false; меню.hidden = false;
+    document.documentElement.classList.add('mnu-open');
+    кнопка.setAttribute('aria-expanded','true');
+    кнопка.setAttribute('aria-label','Закрыть меню разделов');
+    document.addEventListener('keydown', поклавише, true);
+    var с = доступные();
+    if (с.length) с[0].focus();
+  }
+  function закрыть(вернуть){
+    if (!открыто) return;
+    открыто = false;
+    меню.hidden = true; шторка.hidden = true;
+    document.documentElement.classList.remove('mnu-open');
+    кнопка.setAttribute('aria-expanded','false');
+    кнопка.setAttribute('aria-label','Открыть меню разделов');
+    document.removeEventListener('keydown', поклавише, true);
+    if (вернуть !== false) кнопка.focus();
+  }
+  /* Tab ходит по кольцу «бургер + пункты меню» и наружу не выпадает. */
+  function поклавише(e){
+    if (e.key === 'Escape' || e.key === 'Esc'){ e.preventDefault(); закрыть(); return }
+    if (e.key !== 'Tab') return;
+    var кольцо = [кнопка].concat(доступные());
+    var i = кольцо.indexOf(document.activeElement);
+    var к = e.shiftKey ? i - 1 : i + 1;
+    if (i < 0) к = 0;
+    if (к < 0) к = кольцо.length - 1;
+    if (к >= кольцо.length) к = 0;
+    e.preventDefault();
+    кольцо[к].focus();
+  }
+  кнопка.addEventListener('click', function(){ открыто ? закрыть() : открыть() });
+  шторка.addEventListener('click', function(){ закрыть() });
+  меню.addEventListener('click', function(e){
+    var крест = e.target.closest('[data-menu-close]');
+    if (крест){ закрыть(); return }
+    var ссылка = e.target.closest('a[href^="#"]');
+    if (!ссылка) return;
+    var цель = document.getElementById(ссылка.getAttribute('href').slice(1));
+    закрыть(false);
+    if (цель){                       /* фокус уходит в выбранный раздел */
+      цель.setAttribute('tabindex','-1');
+      setTimeout(function(){ цель.focus({preventScroll:true}) }, 0);
+    }
+  });
+  function померить(){ if (широкий.matches) закрыть(false) }
+  широкий.addEventListener ? широкий.addEventListener('change', померить)
+                           : широкий.addListener(померить);
+})();
+
+/* Сменяющиеся сообщения в рамке монитора — только для этой страницы. */
+(function(){
+  'use strict';
+  var короб = document.querySelector('[data-spot]');
+  if (!короб) return;
+  var кадры = Array.prototype.slice.call(короб.querySelectorAll('.slide'));
+  var точки = Array.prototype.slice.call(document.querySelectorAll('[data-dots] button'));
+  var полоска = document.querySelector('[data-prog] i');
+  var экран = короб.closest('.scr');
+  var i = 0, ШАГ = 5200, таймер = null, идёт = false, пауза = false;
+  var тихо = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function показать(n){
+    i = (n + кадры.length) % кадры.length;
+    кадры.forEach(function(s,k){ s.classList.toggle('on', k===i) });
+    точки.forEach(function(d,k){ d.setAttribute('aria-current', k===i ? 'true':'false') });
+  }
+  function залить(){
+    if (!полоска || тихо) return;
+    полоска.style.transition = 'none';
+    полоска.style.width = '0%';
+    void полоска.offsetWidth;
+    полоска.style.transition = 'width ' + ШАГ + 'ms linear';
+    полоска.style.width = '100%';
+  }
+  function пуск(){
+    if (тихо || идёт || пауза) return;
+    идёт = true; залить();
+    таймер = setInterval(function(){ показать(i+1); залить() }, ШАГ);
+  }
+  function стоп(){
+    идёт = false;
+    if (таймер){ clearInterval(таймер); таймер = null }
+    if (полоска && !тихо){
+      var w = getComputedStyle(полоска).width;
+      полоска.style.transition = 'none';
+      полоска.style.width = w;
+    }
+  }
+  точки.forEach(function(d,k){
+    d.addEventListener('click', function(){ стоп(); показать(k); пуск() });
+  });
+  var кнопка = document.querySelector('[data-pause]');
+  if (кнопка && !тихо){
+    кнопка.hidden = false;
+    кнопка.addEventListener('click', function(){
+      пауза = !пауза;
+      кнопка.textContent = пауза ? 'Пуск' : 'Пауза';
+      пауза ? стоп() : пуск();
+    });
+  }
+  if (экран){
+    экран.addEventListener('mouseenter', стоп);
+    экран.addEventListener('mouseleave', пуск);
+    экран.addEventListener('focusin', стоп);
+    экран.addEventListener('focusout', пуск);
+  }
+  document.addEventListener('visibilitychange', function(){
+    document.hidden ? стоп() : пуск();
+  });
+  if ('IntersectionObserver' in window && экран){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting ? пуск() : стоп() });
+    }, {threshold:.25}).observe(экран);
+  } else {
+    пуск();
+  }
+})();
+
+/* Карта маршрутов: подсветка по очереди и по нажатию на номер */
+(function(){
+  var корень=document.querySelector('[data-karta]'); if(!корень) return;
+  var карта=корень.querySelector('.kmap'), слои=Array.prototype.slice.call(корень.querySelectorAll('.rl'));
+  var фишки=Array.prototype.slice.call(корень.querySelectorAll('.kch')), все=корень.querySelector('[data-all]');
+  var инфо=корень.querySelector('[data-info]');
+  var НАЗ={"4":["мкр. Северная гора","Завод «Янтарь»"],"8":["ул. О. Кошевого","Силикатный завод (мкр. А. Космодемьянского)"],"10":["мкр. Северная гора","Завод «Янтарь»"],"21":["ул. П. Морозова","Автошкола"],"25":["мкр. Северная гора","СНТ «Медик»"],"26":["ул. Белорусская","ул. Аксакова"],"29":["Завод «Янтарь»","СНТ «Колосок»"]};
+  var тихо=matchMedia('(prefers-reduced-motion:reduce)').matches, i=-1, таймер=null, видно=false;
+  function показать(n){
+    карта.classList.toggle('focus', !!n);
+    слои.forEach(function(л){ л.classList.toggle('on', л.dataset.r===n) });
+    фишки.forEach(function(ф){ ф.setAttribute('aria-pressed', ф.dataset.r===n ? 'true':'false') });
+    все.setAttribute('aria-pressed', n ? 'false':'true');
+    инфо.textContent = n ? 'Маршрут '+n+': '+НАЗ[n][0]+' ↔ '+НАЗ[n][1] : 'Маршруты 4, 8, 10, 21, 25, 26, 29, 48';
+  }
+  function шаг(){ i=(i+1)%фишки.length; показать(фишки[i].dataset.r) }
+  function пуск(){ if(тихо||таймер||!видно) return; шаг(); таймер=setInterval(шаг,3000) }
+  function стоп(){ if(таймер){ clearInterval(таймер); таймер=null } }
+  фишки.forEach(function(ф){ ф.addEventListener('click',function(){ стоп(); показать(ф.dataset.r); i=фишки.indexOf(ф) }) });
+  все.addEventListener('click',function(){ стоп(); показать(null) });
+  показать(null);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ видно=es[0].isIntersecting; видно ? пуск() : (стоп(), показать(null)) },{threshold:.35}).observe(корень);
+  }
+})();
+</script>
+</body>
+</html>
